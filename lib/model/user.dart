@@ -1,1 +1,3 @@
-class User {}
+class User {
+
+}
