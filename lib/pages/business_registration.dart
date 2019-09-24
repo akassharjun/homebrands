@@ -40,6 +40,7 @@ class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
 //                        //Displaying dropdown menu / Cupertino picker according to the platform
 //                        Platform.isAndroid ? androidCategoryMenu() : iosCategoryPicker(),
 
+                      //TODO: add drop down menu for category selection
                         ReusableTextField(
                           hintText: 'SELLER NAME',
                           color: kWhite,

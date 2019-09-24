@@ -6,6 +6,7 @@ import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/utils/theme_data.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 import 'package:homebrands/constants.dart';
+import 'package:homebrands/model/category.dart';
 
 class DashboardPage extends StatefulWidget {
   static const ROUTE = "dashboard";
@@ -18,6 +19,10 @@ class _DashboardPageState extends State<DashboardPage> {
   final dashboardBloc = DashboardBloc();
   int _currentPageIndex = 0;
   PageController _controller = PageController();
+
+  Category category = new Category(
+    name: 'Cakes & Sweets',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +68,56 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+  //Method to build the category menu
   Widget _buildCategoryPage(){
-    //method used to build category method
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GridView.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        children: <Widget>[
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+          _buildCategoryContainer(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryContainer(){
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Container(
+        height: ScreenUtil.getHeight(10),
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: Container(
+                child: Image.network('https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                fit: BoxFit.fill,),
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  category.name,
+                  style: TextStyle(
+                    fontSize: ScreenUtil.getTextSize(10)
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildTrendingProductCard() {

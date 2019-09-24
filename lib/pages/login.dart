@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                                 text: 'Register your Business',
                                 onTap: (){
                                   print('clicked register');
-                                  //TODO: add navigation functionality
+                                  Navigator.pushNamed(context, Routes.BUSINESS_REGISTRATION);
                                 },
                               ),
                             ],
