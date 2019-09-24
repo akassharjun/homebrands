@@ -5,6 +5,7 @@ import 'package:homebrands/widgets/text_field.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/widgets/clickable_text.dart';
+import 'package:homebrands/pages/sign_up.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -48,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     Container(
-//                width: (MediaQuery.of(context).size.width)*0.8,
                       child: Column(
                         children: <Widget>[
                           ReusableTextField(
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                                 text: 'Sign Up',
                                 onTap: (){
                                   print('clicked sign up');
-                                  //TODO: add navigation functionality
+                                  Navigator.pushNamed(context, SignupPage.ROUTE);
                                 },
                               ),
                               Text(
