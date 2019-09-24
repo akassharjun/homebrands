@@ -85,38 +85,86 @@ class _DashboardPageState extends State<DashboardPage> {
           _buildCategoryContainer(),
           _buildCategoryContainer(),
           _buildCategoryContainer(),
+          showLoadingIndicator(),
         ],
       ),
     );
   }
 
+  //method to create a category method item
   Widget _buildCategoryContainer(){
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Container(
-        height: ScreenUtil.getHeight(10),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: Container(
-                child: Image.network('https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                fit: BoxFit.fill,),
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  category.name,
-                  style: TextStyle(
-                    fontSize: ScreenUtil.getTextSize(10)
-                  ),
+    return GestureDetector(
+      onTap: (){
+        _alertBox();
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Container(
+          height: ScreenUtil.getHeight(10),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: Container(
+                  child: Image.network('https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                  fit: BoxFit.fill,),
                 ),
               ),
-            )
-          ],
+              Expanded(
+                child: Center(
+                  child: Text(
+                    category.name,
+                    style: TextStyle(
+                      fontSize: ScreenUtil.getTextSize(10)
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  //method to display circular loading indicator
+  Widget showLoadingIndicator(){
+    return Container(
+      height: ScreenUtil.getHeight(25),
+      child: Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Future<void> _alertBox() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('error message :)'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Error message.'),
+                Text('Error message'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                'OK!',
+                style: TextStyle(
+                  color: kMagenta
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
