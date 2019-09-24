@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/utils/screen_util.dart';
+import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/theme_data.dart';
 
 class AppLogo extends StatelessWidget {

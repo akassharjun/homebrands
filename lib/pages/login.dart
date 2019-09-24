@@ -6,12 +6,11 @@ import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/widgets/clickable_text.dart';
 import 'package:homebrands/pages/sign_up.dart';
+import 'package:homebrands/widgets/flat_button.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
-
-  static const ROUTE = 'login';
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     
     ScreenUtil()..init(context);
-    
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -38,13 +37,13 @@ class _LoginPageState extends State<LoginPage> {
 
                   children: <Widget>[
                     Text(
-                        'WELCOME BACK!',
-                        style: TextStyle(
-                          fontSize: ScreenUtil.getTextSize(20),
-                          height: 0.7,
-                          color: kWhite,
-                          fontWeight: FontWeight.w700,
-                        )
+                      'WELCOME BACK!',
+                      style: TextStyle(
+                        fontSize: ScreenUtil.getTextSize(20),
+                        height: 0.7,
+                        color: kWhite,
+                        fontWeight: FontWeight.w700,
+                      )
                     ),
                     SizedBox(
                       height: 20,
@@ -66,21 +65,11 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: ScreenUtil.getHeight(3),
                           ),
-                          MaterialButton(
-                            onPressed: (){
-                              Navigator.pushNamed(context, DashboardPage.ROUTE);
-                            },
-                            height: ScreenUtil.getHeight(5),
-                            minWidth: double.maxFinite,
-                            elevation: 0,
-                            color: kWhite,
-                            child: Text(
-                              'LOG IN',
-                              style: TextStyle(
-                                color: kMagenta,
-                                fontSize: ScreenUtil.getTextSize(11)
-                              ),
-                            ),
+                          Button(
+                            buttonText: 'LOG IN',
+                            textColor: kMagenta,
+                            backgroundColor: kWhite,
+                            onPressed: (){Navigator.pushNamed(context, Routes.HOME);},
                           ),
                           SizedBox(
                             height: ScreenUtil.getHeight(1),
@@ -92,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                                 text: 'Sign Up',
                                 onTap: (){
                                   print('clicked sign up');
-                                  Navigator.pushNamed(context, SignUpPage.ROUTE);
+                                  Navigator.pushNamed(context, Routes.SIGN_UP);
                                 },
                               ),
                               Text(
@@ -123,4 +112,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+
 

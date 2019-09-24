@@ -4,22 +4,17 @@ import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/text_field.dart';
 import 'package:homebrands/widgets/flat_button.dart';
-import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/clickable_text.dart';
 
-class SignUpPage extends StatefulWidget {
-
-  static const ROUTE = 'signup';
-
+class BusinessRegistrationPage extends StatefulWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _BusinessRegistrationPageState createState() => _BusinessRegistrationPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil()..init(context);
-    
     return Scaffold(
       backgroundColor: kMagenta,
       body: SafeArea(
@@ -31,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'JOIN US!',
+                    'REGISTER YOUR BUSINESS TODAY!',
                     style: TextStyle(
                       fontSize: ScreenUtil.getTextSize(20),
                       height: 0.7,
@@ -42,13 +37,22 @@ class _SignUpPageState extends State<SignUpPage> {
                   Container(
                     child: Column(
                       children: <Widget>[
+//                        //Displaying dropdown menu / Cupertino picker according to the platform
+//                        Platform.isAndroid ? androidCategoryMenu() : iosCategoryPicker(),
+
                         ReusableTextField(
-                          hintText: 'FULL NAME',
+                          hintText: 'SELLER NAME',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
-                          hintText: 'USERNAME',
+                          hintText: 'BUSINESS NAME',
+                          color: kWhite,
+                          obscureText: false,
+                        ),
+
+                        ReusableTextField(
+                          hintText: 'PAYMENT METHOD',
                           color: kWhite,
                           obscureText: false,
                         ),
@@ -62,16 +66,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: kWhite,
                           obscureText: true,
                         ),
-                        ReusableTextField(
-                          hintText: 'PAYMENT METHOD',
-                          color: kWhite,
-                          obscureText: false,
-                        ),
                         SizedBox(
-                          height: ScreenUtil.getHeight(5),
+                          height: 40,
                         ),
                         Button(
-                          buttonText: 'SIGN UP',
+                          buttonText: 'REGISTER BUSINESS',
                           textColor: kMagenta,
                           backgroundColor: kWhite,
                           onPressed: (){Navigator.pushNamed(context, Routes.HOME);},
@@ -83,16 +82,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                            'or ',
-                              style: TextStyle(
-                                  color: kWhite
-                              )
+                                'or ',
+                                style: TextStyle(
+                                    color: kWhite
+                                )
                             ),
                             ClickableText(
-                              text: 'Register your Business',
+                              text: 'Sign Up',
                               onTap: (){
                                 print('clicked register');
-                                Navigator.pushNamed(context, Routes.BUSINESS_REGISTRATION);
+                                Navigator.pushNamed(context, Routes.SIGN_UP);
                               },
                             ),
                           ],

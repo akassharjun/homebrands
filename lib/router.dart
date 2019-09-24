@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/pages/login.dart';
+import 'pages/sign_up.dart';
+import 'pages/business_registration.dart';
 
 import 'pages/login.dart';
 import 'pages/splash_screen.dart';
@@ -22,7 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case Routes.SIGN_UP:
       return MaterialPageRoute(
-        builder: (context) => SplashScreen(),
+        builder: (context) => SignUpPage(),
+      );
+    case Routes.BUSINESS_REGISTRATION:
+      return MaterialPageRoute(
+        builder: (context) => BusinessRegistrationPage(),
       );
     default:
       return MaterialPageRoute(

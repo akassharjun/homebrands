@@ -14,4 +14,5 @@ class Routes {
   static const SPLASH = '/splash';
   static const LOGIN = '/login';
   static const SIGN_UP = '/signup';
+  static const BUSINESS_REGISTRATION = '/business_registration';
 }

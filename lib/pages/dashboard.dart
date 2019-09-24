@@ -5,6 +5,7 @@ import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/utils/theme_data.dart';
 import 'package:homebrands/widgets/app_logo.dart';
+import 'package:homebrands/constants.dart';
 
 class DashboardPage extends StatefulWidget {
   static const ROUTE = "dashboard";
