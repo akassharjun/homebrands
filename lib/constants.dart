@@ -11,4 +11,7 @@ const Color kAshAccent = Color(0xFF070707);
 
 class Routes {
   static const HOME = '/home';
+  static const SPLASH = '/splash';
+  static const LOGIN = '/login';
+  static const SIGN_UP = '/signup';
 }
