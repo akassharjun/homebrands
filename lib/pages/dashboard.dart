@@ -45,20 +45,25 @@ class _DashboardPageState extends State<DashboardPage> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           _buildDashboardPage(),
-          Column(
-            children: <Widget>[
-              _buildFeaturedProductCard(),
-              Container(
-                height: ScreenUtil.getHeight(28),
-                child: _buildTrendingProductCard(),
-              )
-            ],
-          ),
+          _buildCategoryPage(),
+//          Column(
+//            children: <Widget>[
+//              _buildFeaturedProductCard(),
+//              Container(
+//                height: ScreenUtil.getHeight(28),
+//                child: _buildTrendingProductCard(),
+//              )
+//            ],
+//          ),
           Container(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
+  }
+
+  Widget _buildCategoryPage(){
+    //method used to build category method
   }
 
   Widget _buildTrendingProductCard() {
@@ -95,7 +100,7 @@ class _DashboardPageState extends State<DashboardPage> {
             height: ScreenUtil.getHeight(22),
             width: ScreenUtil.getWidth(35),
             decoration: BoxDecoration(
-              color: Colors.red,
+              color: Colors.grey,
               borderRadius: ScreenUtil.getBorderRadiusCircular(10),
             ),
             child: FlutterLogo(),

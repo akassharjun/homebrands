@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/router.dart' as router;
 import 'package:homebrands/utils/theme_data.dart';
+import 'pages/splash_screen.dart';
 
 import 'bloc/simple_bloc_delegate.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'AirbnbCereal',
         brightness: Brightness.light,
       ),
-      initialRoute: DashboardPage.ROUTE,
+      initialRoute: SplashScreen.ROUTE,
       onGenerateRoute: router.generateRoute,
     );
   }
