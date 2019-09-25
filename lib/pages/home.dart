@@ -57,21 +57,8 @@ class _HomePageState extends State<HomePage> {
   Widget _buildCategoryPage() {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: GridView.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        children: <Widget>[
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          _buildCategoryContainer(),
-          showLoadingIndicator(),
-        ],
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3)
       ),
     );
   }

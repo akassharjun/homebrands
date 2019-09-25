@@ -73,7 +73,8 @@ class NetworkService extends Api {
     var url = '$baseURL/category';
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      return CategoryList.fromJson(response.body.toString());
+//      return CategoryList.fromJson(response.body.toString());
+      return null;
     } else {
       throw NetworkException(response.body);
     }

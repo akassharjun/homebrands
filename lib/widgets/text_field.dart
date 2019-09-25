@@ -10,8 +10,9 @@ class ReusableTextField extends StatelessWidget {
   final Widget icon;
   final Color color;
   final Function onChanged;
+  final TextEditingController controller;
 
-  ReusableTextField({@required this.obscureText, @required this.hintText, this.icon, @required this.color, this.onChanged});
+  ReusableTextField({@required this.obscureText, @required this.hintText, this.icon, @required this.color, this.onChanged, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class ReusableTextField extends StatelessWidget {
     ScreenUtil()..init(context);
 
     return TextField(
+      controller: controller,
       onChanged: onChanged,
       obscureText: obscureText,
       style: TextStyle(
