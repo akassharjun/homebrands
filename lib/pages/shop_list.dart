@@ -5,6 +5,8 @@ import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/pages/shop_details.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/screen_util.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'dart:math';
 
 class ShopListPage extends StatefulWidget {
 
@@ -32,21 +34,12 @@ class _ShopListPageState extends State<ShopListPage> {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height,
-                child: GridView.builder(
-                  itemCount: _allShops.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (BuildContext context, int index){
-                    return _buildShopContainer(index);
-                  },
-                ),
-              )
-            ],
-          ),
+        child: GridView.builder(
+          itemCount: _allShops.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index){
+            return _buildShopContainer(index);
+          },
         ),
       ),
     );
@@ -72,19 +65,46 @@ class _ShopListPageState extends State<ShopListPage> {
         _viewShop(shopIndex);
       },
       child: Card(
+        clipBehavior: Clip.antiAlias,
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Center(
-                child: Text(
-                  _allShops[shopIndex].businessName,
-                ),
+              flex: 2,
+              child: Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                child: Image.network('https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', fit: BoxFit.cover,),
               ),
             ),
             Expanded(
               child: Center(
                 child: Text(
-                  _allShops[shopIndex].paymentMethod,
+                  _allShops[shopIndex].businessName,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: ScreenUtil.getTextSize(11)
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      _allShops[shopIndex].paymentMethod,
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getHeight(0.5),
+                    ),
+                    SmoothStarRating(
+                      starCount: 5,
+                      rating: getStarRating().toDouble(),
+                      size: ScreenUtil.getHeight(1.5),
+                    )
+                  ],
                 ),
               ),
             )
@@ -93,6 +113,12 @@ class _ShopListPageState extends State<ShopListPage> {
       ),
     );
   }
+}
+
+//method to generate random star ratings
+int getStarRating(){
+  var range = Random();
+  return range.nextInt(6);
 }
 
 //Dummy list of shops
@@ -113,5 +139,4 @@ List<Shop> _allShops = [
   Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
   Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
   Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-
 ];

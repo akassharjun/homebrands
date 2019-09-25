@@ -54,11 +54,12 @@ class _DashboardPageState extends State<DashboardPage> {
       builder: (BuildContext context, DashboardState state) {
         if (state is InitialDashboardState) {
 //          return _buildFeaturedProductCard();
-          return Container(
-            height: ScreenUtil.getHeight(25),
-            child: Center(child: CircularProgressIndicator()),
-            color: Colors.grey[300],
-          );
+//          return Container(
+//            height: ScreenUtil.getHeight(25),
+//            child: Center(child: CircularProgressIndicator()),
+//            color: Colors.grey[300],
+//          );
+        return _buildFeaturedProductCard();
         }
 
         if (state is NetworkErrorFetchingProductsDashboardState) {
@@ -114,90 +115,75 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildTrendingShopsCardSlider() {
-    return GestureDetector(
-      onTap: (){
-        displayAlertBox();
-        print('tapped trending');
+    return BlocBuilder(
+      bloc: dashboardBloc,
+      builder: (BuildContext context, DashboardState state) {
+        if (state is InitialDashboardState) {
+//            return Container(
+//              height: ScreenUtil.getHeight(30),
+//              child: Center(child: CircularProgressIndicator()),
+//              color: Colors.grey[300],
+//            );
+        return _buildTrendingProductCard();
+        }
+
+        if (state is NetworkErrorFetchingShopsDashboardState) {
+          print(state.error);
+        }
+
+        if (state is NetworkBusyFetchingShopsDashboardState) {
+          return Container(
+            height: ScreenUtil.getHeight(25),
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (state is TrendingShopsFetchedDashboardState) {
+          if (!state.hasData) {}
+
+          List items = state.shopList;
+
+          items = [1, 2, 3, 4, 5].map((i) {
+            return Builder(
+              builder: (BuildContext context) {
+                return Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                    decoration: BoxDecoration(color: Colors.amber),
+                    child: Text(
+                      'text $i',
+                      style: TextStyle(fontSize: 16.0),
+                    ));
+              },
+            );
+          }).toList();
+
+          return CarouselSlider(
+            items: items,
+            height: ScreenUtil.getHeight(25),
+            aspectRatio: 16 / 9,
+            viewportFraction: 1.0,
+            initialPage: 0,
+            enableInfiniteScroll: true,
+            reverse: false,
+            autoPlay: true,
+            autoPlayInterval: Duration(seconds: 3),
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            pauseAutoPlayOnTouch: Duration(seconds: 10),
+            enlargeCenterPage: true,
+            scrollDirection: Axis.horizontal,
+          );
+        }
+        return null;
       },
-      child: BlocBuilder(
-        bloc: dashboardBloc,
-        builder: (BuildContext context, DashboardState state) {
-          if (state is InitialDashboardState) {
-            return Container(
-              height: ScreenUtil.getHeight(30),
-              child: Center(child: CircularProgressIndicator()),
-              color: Colors.grey[300],
-            );
-          }
-
-          if (state is NetworkErrorFetchingShopsDashboardState) {
-            print(state.error);
-          }
-
-          if (state is NetworkBusyFetchingShopsDashboardState) {
-            return Container(
-              height: ScreenUtil.getHeight(25),
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
-
-          if (state is TrendingShopsFetchedDashboardState) {
-            if (!state.hasData) {}
-
-            List items = state.shopList;
-
-            items = [1, 2, 3, 4, 5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.amber),
-                      child: Text(
-                        'text $i',
-                        style: TextStyle(fontSize: 16.0),
-                      ));
-                },
-              );
-            }).toList();
-
-            return CarouselSlider(
-              items: items,
-              height: ScreenUtil.getHeight(25),
-              aspectRatio: 16 / 9,
-              viewportFraction: 1.0,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              pauseAutoPlayOnTouch: Duration(seconds: 10),
-              enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            );
-          }
-          return null;
-        },
-      ),
     );
-
-
   }
-  List<Widget> getTrendingCarouselItems(){
-    List<Widget> trendingItems = [];
-    for (var i = 0; i < _allShops.length; ++i) {
-      trendingItems.add(
-        _build(_allShops[i])
-      );
-    }
-    return trendingItems;
-  }
+
 
   Widget _buildTrendingProductCard() {
-    var items = [1, 2, 3, 4, 5].map((i) {
+    var items = _allShops.toList().map((i) {
       return Builder(builder: (BuildContext context) {
-        return _build(_allShops[i]);
+        return _buildTrendingItem(i);
       });
     }).toList();
   
@@ -217,7 +203,8 @@ class _DashboardPageState extends State<DashboardPage> {
       scrollDirection: Axis.horizontal,
       );
   }
-  Widget _build(Shop shop) {
+
+  Widget _buildTrendingItem(Shop shop) {
     return Container(
       height: ScreenUtil.getHeight(25),
       width: ScreenUtil.getWidth(35),
@@ -227,7 +214,7 @@ class _DashboardPageState extends State<DashboardPage> {
             height: ScreenUtil.getHeight(22),
             width: ScreenUtil.getWidth(35),
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: Colors.grey[200],
               borderRadius: ScreenUtil.getBorderRadiusCircular(10),
               ),
             child: FlutterLogo(),
@@ -239,7 +226,31 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
 
-  Container _buildFeaturedProductCard() {
+  Widget _buildFeaturedProductCard() {
+    var items = _allShops.toList().map((i) {
+      return Builder(builder: (BuildContext context) {
+        return _buildFeaturedItem(i);
+      });
+    }).toList();
+
+    return CarouselSlider(
+      items: items,
+      height: ScreenUtil.getHeight(25),
+      aspectRatio: 16 / 9,
+      viewportFraction: 1.0,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      reverse: false,
+      autoPlay: true,
+      autoPlayInterval: Duration(seconds: 3),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      pauseAutoPlayOnTouch: Duration(seconds: 10),
+      enlargeCenterPage: true,
+      scrollDirection: Axis.horizontal,
+    );
+  }
+
+  Widget _buildFeaturedItem(Shop shop){
     return Container(
       padding: ScreenUtil.getPaddingAll(10),
       height: ScreenUtil.getHeight(25),
@@ -272,7 +283,7 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               children: <Widget>[
                 Text(
-                  "HeartStone Designs",
+                  shop.businessName,
                   style: TextStyle(
                     fontSize: ScreenUtil.getTextSize(11),
                     fontWeight: FontWeight.w500,
