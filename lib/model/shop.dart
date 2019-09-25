@@ -4,20 +4,20 @@
 
 import 'dart:convert';
 
-class Shops {
+class ShopList {
 	int count;
 	List<Shop> shop;
 	
-	Shops({
+	ShopList({
 		      this.count,
 		      this.shop,
 	      });
 	
-	factory Shops.fromJson(String str) => Shops.fromMap(json.decode(str));
+	factory ShopList.fromJson(String str) => ShopList.fromMap(json.decode(str));
 	
 	String toJson() => json.encode(toMap());
 	
-	factory Shops.fromMap(Map<String, dynamic> json) => Shops(
+	factory ShopList.fromMap(Map<String, dynamic> json) => ShopList(
 		count: json["count"],
 		shop: List<Shop>.from(json["shop"].map((x) => Shop.fromMap(x))),
 		);

@@ -1,23 +1,27 @@
-import 'package:homebrands/model/Product.dart';
 import 'package:homebrands/model/category.dart';
+import 'package:homebrands/model/product.dart';
 import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class Api {
-  Future<List<Shop>> getTrendingShops();
+  Future<ShopList> getTrendingShops();
 
-  Future<List<Product>> getFeaturedProducts();
+  Future<ProductList> getFeaturedProducts();
 
-  Future<List<Shop>> getShops();
+  Future<ShopList> getShops();
 
-  Future<List<Product>> getProductByShopID(int shopID);
+  Future<ProductList> getProductByShopID(int shopID);
 
   Future<AuthResponse> validateLoginCredentials(
       String username, String password);
 
-  Future<List<CategoryList>> getCatergories();
+  Future<CategoryList> getCatergories();
+
+  Future<ShopList> getShopsByCategoryName(String categoryName);
+
+  Future<ProductList> getProductsByShopId(String shopID);
 }
 
 class NetworkService extends Api {
@@ -30,26 +34,14 @@ class NetworkService extends Api {
   }
 
   @override
-  Future<List<Shop>> getTrendingShops() {
+  Future<ShopList> getTrendingShops() {
     // TODO: implement getFeaturedShops
     return null;
   }
 
   @override
-  Future<List<Product>> getProductByShopID(int shopID) {
+  Future<ProductList> getProductByShopID(int shopID) {
     // TODO: implement getProductByShopID
-    return null;
-  }
-
-  @override
-  Future<List<Shop>> getShops() {
-    // TODO: implement getShops
-    return null;
-  }
-
-  @override
-  Future<List<Product>> getFeaturedProducts() {
-    // TODO: implement getTrendingProducts
     return null;
   }
 
@@ -69,15 +61,55 @@ class NetworkService extends Api {
   }
 
   @override
-  Future<List<CategoryList>> getCatergories() async {
-    var url = '$baseURL/category';
-    var response = await http.get(url);
+  Future<CategoryList> getCatergories() async {
+    var url = '$baseURL/categories';
+    var response = await http.get(
+      url,
+      headers: await _getBearerToken(),
+    );
     if (response.statusCode == 200) {
 //      return CategoryList.fromJson(response.body.toString());
       return null;
     } else {
       throw NetworkException(response.body);
     }
+  }
+
+  @override
+  Future<ShopList> getShopsByCategoryName(String categoryName) async {
+    var url = '$baseURL/categories/$categoryName';
+    var response = await http.get(
+      url,
+      headers: await _getBearerToken(),
+    );
+    if (response.statusCode == 200) {
+      return ShopList.fromJson(response.body.toString());
+    } else {
+      throw NetworkException(response.body);
+    }
+  }
+
+  @override
+  Future<ProductList> getProductsByShopId(String shopID) async {
+    var url = '$baseURL/shops/$shopID/items';
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      return ProductList.fromJson(response.body.toString());
+    } else {
+      throw NetworkException(response.body);
+    }
+  }
+
+  @override
+  Future<ProductList> getFeaturedProducts() {
+    // TODO: implement getFeaturedProducts
+    return null;
+  }
+
+  @override
+  Future<ShopList> getShops() {
+    // TODO: implement getShops
+    return null;
   }
 }
 

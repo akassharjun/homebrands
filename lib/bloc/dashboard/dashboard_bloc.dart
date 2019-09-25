@@ -30,8 +30,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       // network call
       NetworkService networkService = NetworkService();
-      List productList = await networkService.getFeaturedProducts();
-      yield FeaturedProductsFetchedDashboardState(productList: productList);
+      ProductList products = await networkService.getFeaturedProducts();
+      yield FeaturedProductsFetchedDashboardState(productList: products.items);
     } catch (error, stacktrace) {
       // handle network call error
       yield NetworkErrorFetchingProductsDashboardState(error: error.toString());
@@ -43,8 +43,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       // network call
       NetworkService networkService = NetworkService();
-      List shopList = await networkService.getShops();
-      yield TrendingShopsFetchedDashboardState(shopList: shopList);
+      ShopList shops = await networkService.getShops();
+      yield TrendingShopsFetchedDashboardState(shopList: shops.shop);
     } catch (error, stacktrace) {
       // handle network call error
       yield NetworkErrorFetchingShopsDashboardState(error: error.toString());
