@@ -22,6 +22,8 @@ abstract class Api {
   Future<ShopList> getShopsByCategoryName(String categoryName);
 
   Future<ProductList> getProductsByShopId(String shopID);
+
+  Future<NewUser> registerUser(User user);
 }
 
 class NetworkService extends Api {
@@ -110,6 +112,17 @@ class NetworkService extends Api {
   Future<ShopList> getShops() {
     // TODO: implement getShops
     return null;
+  }
+
+  @override
+  Future<NewUser> registerUser(User user) async {
+    var url = '$baseURL/auth/signup';
+    var response = await http.post(url, body: user.toJson());
+    if (response.statusCode == 200) {
+      return NewUser.fromJson(response.body.toString());
+    } else {
+      throw NetworkException(response.body);
+    }
   }
 }
 
