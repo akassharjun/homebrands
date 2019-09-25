@@ -5,6 +5,8 @@ import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 import 'package:homebrands/widgets/alert_box.dart';
+import 'package:homebrands/pages/product_details.dart';
+import 'package:homebrands/pages/shop_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,20 +20,6 @@ class _HomePageState extends State<HomePage> {
   Category category = new Category(
     name: 'Cakes & Sweets',
   );
-
-
-  //Dummy list of category items
-  List<Category> menuItems = [
-    Category(name: 'Enzos Pizzarie', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-    Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    Category(name: 'Enzos Pizzarie', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-    Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    Category(name: 'Enzos Pizzarie', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-    Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-    Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +72,27 @@ class _HomePageState extends State<HomePage> {
 
   //method to navigate to each respective category screen depending on category
   navigateScreen(int index){
-    if (index == 3){
-      return AlertBox.getAlertBox();
-    }
-  }
+//    if (index == 3){
+//      return AlertBox.getAlertBox(
+//        message: 'Error detected, Please Re-try',
+//        title: 'Error 404',
+//        context: context,
+//        flatButtonText: 'Try Again',
+//        onPressed: (){
+//          Navigator.pop(context);
+//        }
+//      );
+//    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ShopListPage(
+          category: Category(
+            name: menuItems[index].name
+          ),
+        ),
+      ),
+    );  }
 
   //method to create a category method item
   Widget _buildCategoryContainer(int menuItemIndex) {
@@ -174,3 +179,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+//Dummy list of category items
+List<Category> menuItems = [
+  Category(name: 'Pizzas', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+  Category(name: 'Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
+  Category(name: 'crafts', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+  Category(name: 'arts', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+  Category(name: 'Flowers', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
+  Category(name: 'Pottery', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+  Category(name: 'Pets', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+  Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
+  Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+];

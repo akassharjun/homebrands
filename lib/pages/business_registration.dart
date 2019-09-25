@@ -12,6 +12,13 @@ class BusinessRegistrationPage extends StatefulWidget {
 }
 
 class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
+
+  TextEditingController sellerNameController = new TextEditingController();
+  TextEditingController businessNameController = new TextEditingController();
+  TextEditingController paymentMethodController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil()..init(context);
@@ -42,27 +49,32 @@ class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
 
                       //TODO: add drop down menu for category selection
                         ReusableTextField(
+                          controller: sellerNameController,
                           hintText: 'SELLER NAME',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: businessNameController,
                           hintText: 'BUSINESS NAME',
                           color: kWhite,
                           obscureText: false,
                         ),
 
                         ReusableTextField(
+                          controller: paymentMethodController,
                           hintText: 'PAYMENT METHOD',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: emailController,
                           hintText: 'EMAIL',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: passwordController,
                           hintText: 'PASSWORD',
                           color: kWhite,
                           obscureText: true,

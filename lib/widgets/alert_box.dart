@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:homebrands/constants.dart';
 class AlertBox{
-  static Future<void> getAlertBox({BuildContext context, Function onPressed, String title, String message, String subMessage, String flatButtonText}) async {
+  static Future<void> getAlertBox({BuildContext context, Function onPressed, String title, String message, String flatButtonText}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -14,7 +14,6 @@ class AlertBox{
             child: ListBody(
               children: <Widget>[
                 Text(message),
-                Text(subMessage),
               ],
             ),
           ),

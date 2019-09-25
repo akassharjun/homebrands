@@ -16,6 +16,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  TextEditingController fullNameController = new TextEditingController();
+  TextEditingController userNameController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController paymentController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil()..init(context);
@@ -43,26 +50,31 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Column(
                       children: <Widget>[
                         ReusableTextField(
+                          controller: fullNameController,
                           hintText: 'FULL NAME',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: userNameController,
                           hintText: 'USERNAME',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: emailController,
                           hintText: 'EMAIL',
                           color: kWhite,
                           obscureText: false,
                         ),
                         ReusableTextField(
+                          controller: passwordController,
                           hintText: 'PASSWORD',
                           color: kWhite,
                           obscureText: true,
                         ),
                         ReusableTextField(
+                          controller: paymentController,
                           hintText: 'PAYMENT METHOD',
                           color: kWhite,
                           obscureText: false,

@@ -18,6 +18,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  TextEditingController userNameController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     
@@ -40,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                       'WELCOME BACK!',
                       style: TextStyle(
                         fontSize: ScreenUtil.getTextSize(20),
-                        height: 0.7,
+                        height: ScreenUtil.getHeight(0.05),
                         color: kWhite,
                         fontWeight: FontWeight.w700,
                       )
@@ -52,15 +55,17 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           ReusableTextField(
+                            controller: userNameController,
                             hintText: 'USERNAME',
                             color: kWhite,
                             obscureText: false,
                           ),
 
                           ReusableTextField(
-                              hintText: 'PASSWORD',
-                              color: kWhite,
-                              obscureText: true,
+                            controller: passwordController,
+                            hintText: 'PASSWORD',
+                            color: kWhite,
+                            obscureText: true,
                           ),
                           SizedBox(
                             height: ScreenUtil.getHeight(3),
