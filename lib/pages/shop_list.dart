@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:homebrands/model/category.dart';
 import 'package:homebrands/model/shop.dart';
+import 'package:homebrands/pages/shop_details.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/screen_util.dart';
 
@@ -24,31 +25,25 @@ class _ShopListPageState extends State<ShopListPage> {
     Category _category = widget.category;
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          _category.name
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              GridView.builder(
-                itemCount: allShops.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                itemBuilder: (BuildContext context, int index){
-                  return Card(
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            allShops[index].businessName,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            allShops[index].paymentMethod,
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
+              Container(
+                height: MediaQuery.of(context).size.height,
+                child: GridView.builder(
+                  itemCount: allShops.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  itemBuilder: (BuildContext context, int index){
+                    return _buildShopContainer(index);
+                  },
+                ),
               )
             ],
           ),
@@ -57,8 +52,46 @@ class _ShopListPageState extends State<ShopListPage> {
     );
   }
 
-  Widget _buildShopContainer(){
+  _viewShop(int index){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ShopPage(
+          shop: Shop(
+            businessName: allShops[index].businessName,
+            paymentMethod: allShops[index].paymentMethod,
+          ),
+        )
+      )
+    );
+  }
 
+  Widget _buildShopContainer(int shopIndex){
+    return GestureDetector(
+      onTap: (){
+        _viewShop(shopIndex);
+      },
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text(
+                  allShops[shopIndex].businessName,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: Text(
+                  allShops[shopIndex].paymentMethod,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
