@@ -38,7 +38,7 @@ class _ShopListPageState extends State<ShopListPage> {
               Container(
                 height: MediaQuery.of(context).size.height,
                 child: GridView.builder(
-                  itemCount: allShops.length,
+                  itemCount: _allShops.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemBuilder: (BuildContext context, int index){
                     return _buildShopContainer(index);
@@ -58,8 +58,8 @@ class _ShopListPageState extends State<ShopListPage> {
       MaterialPageRoute(
         builder: (context) => ShopPage(
           shop: Shop(
-            businessName: allShops[index].businessName,
-            paymentMethod: allShops[index].paymentMethod,
+            businessName: _allShops[index].businessName,
+            paymentMethod: _allShops[index].paymentMethod,
           ),
         )
       )
@@ -77,14 +77,14 @@ class _ShopListPageState extends State<ShopListPage> {
             Expanded(
               child: Center(
                 child: Text(
-                  allShops[shopIndex].businessName,
+                  _allShops[shopIndex].businessName,
                 ),
               ),
             ),
             Expanded(
               child: Center(
                 child: Text(
-                  allShops[shopIndex].paymentMethod,
+                  _allShops[shopIndex].paymentMethod,
                 ),
               ),
             )
@@ -96,7 +96,7 @@ class _ShopListPageState extends State<ShopListPage> {
 }
 
 //Dummy list of shops
-List<Shop> allShops = [
+List<Shop> _allShops = [
   Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
   Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
   Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),

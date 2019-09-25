@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
 import 'package:homebrands/utils/screen_util.dart';
+import 'package:homebrands/widgets/alert_box.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -112,66 +113,73 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildTrendingShopsCardSlider() {
-    return BlocBuilder(
-      bloc: dashboardBloc,
-      builder: (BuildContext context, DashboardState state) {
-        if (state is InitialDashboardState) {
-          return Container(
-            height: ScreenUtil.getHeight(30),
-            child: Center(child: CircularProgressIndicator()),
-            color: Colors.grey[300],
-          );
-        }
-
-        if (state is NetworkErrorFetchingShopsDashboardState) {
-          print(state.error);
-        }
-
-        if (state is NetworkBusyFetchingShopsDashboardState) {
-          return Container(
-            height: ScreenUtil.getHeight(25),
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-
-        if (state is TrendingShopsFetchedDashboardState) {
-          if (!state.hasData) {}
-
-          List items = state.shopList;
-
-          items = [1, 2, 3, 4, 5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(color: Colors.amber),
-                    child: Text(
-                      'text $i',
-                      style: TextStyle(fontSize: 16.0),
-                    ));
-              },
-            );
-          }).toList();
-
-          return CarouselSlider(
-            items: items,
-            height: ScreenUtil.getHeight(25),
-            aspectRatio: 16 / 9,
-            viewportFraction: 1.0,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            pauseAutoPlayOnTouch: Duration(seconds: 10),
-            enlargeCenterPage: true,
-            scrollDirection: Axis.horizontal,
-          );
-        }
-        return null;
+    return GestureDetector(
+      onTap: (){
+        displayAlertBox();
+        print('tapped trending');
       },
+      child: BlocBuilder(
+        bloc: dashboardBloc,
+        builder: (BuildContext context, DashboardState state) {
+          if (state is InitialDashboardState) {
+            return 
+//            return Container(
+//              height: ScreenUtil.getHeight(30),
+//              child: Center(child: CircularProgressIndicator()),
+//              color: Colors.grey[300],
+//            );
+          }
+
+          if (state is NetworkErrorFetchingShopsDashboardState) {
+            print(state.error);
+          }
+
+          if (state is NetworkBusyFetchingShopsDashboardState) {
+            return Container(
+              height: ScreenUtil.getHeight(25),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+
+          if (state is TrendingShopsFetchedDashboardState) {
+            if (!state.hasData) {}
+
+            List items = state.shopList;
+
+            items = [1, 2, 3, 4, 5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(color: Colors.amber),
+                      child: Text(
+                        'text $i',
+                        style: TextStyle(fontSize: 16.0),
+                      ));
+                },
+              );
+            }).toList();
+
+            return CarouselSlider(
+              items: items,
+              height: ScreenUtil.getHeight(25),
+              aspectRatio: 16 / 9,
+              viewportFraction: 1.0,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 3),
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              pauseAutoPlayOnTouch: Duration(seconds: 10),
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+            );
+          }
+          return null;
+        },
+      ),
     );
     
     
@@ -279,6 +287,24 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
   }
+
+  //method to display circular loading indicator
+  Widget showLoadingIndicator() {
+    return Container(
+      height: ScreenUtil.getHeight(25),
+      child: Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Future<void> displayAlertBox(){
+    return AlertBox.getAlertBox(
+      context: context,
+      title: 'Network Error',
+      message: 'Couldn\'t detect a stable Internet Connection',
+      flatButtonText: 'Try again'
+    );
+  }
+
 
   @override
   void dispose() {
