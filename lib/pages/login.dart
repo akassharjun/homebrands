@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/widgets/text_field.dart';
 import 'package:homebrands/utils/screen_util.dart';
-import 'package:homebrands/pages/dashboard.dart';
+import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/widgets/clickable_text.dart';
 import 'package:homebrands/pages/sign_up.dart';
 import 'package:homebrands/widgets/flat_button.dart';

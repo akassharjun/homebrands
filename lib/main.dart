@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:homebrands/pages/dashboard.dart';
+import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/router.dart' as router;
 import 'package:homebrands/utils/theme_data.dart';
 import 'pages/splash_screen.dart';
