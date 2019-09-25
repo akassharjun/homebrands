@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
+import 'package:homebrands/model/shop.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -122,12 +123,11 @@ class _DashboardPageState extends State<DashboardPage> {
         bloc: dashboardBloc,
         builder: (BuildContext context, DashboardState state) {
           if (state is InitialDashboardState) {
-            return 
-//            return Container(
-//              height: ScreenUtil.getHeight(30),
-//              child: Center(child: CircularProgressIndicator()),
-//              color: Colors.grey[300],
-//            );
+            return Container(
+              height: ScreenUtil.getHeight(30),
+              child: Center(child: CircularProgressIndicator()),
+              color: Colors.grey[300],
+            );
           }
 
           if (state is NetworkErrorFetchingShopsDashboardState) {
@@ -181,15 +181,23 @@ class _DashboardPageState extends State<DashboardPage> {
         },
       ),
     );
-    
-    
-  }
 
+
+  }
+  List<Widget> getTrendingCarouselItems(){
+    List<Widget> trendingItems = [];
+    for (var i = 0; i < _allShops.length; ++i) {
+      trendingItems.add(
+        _build(_allShops[i])
+      );
+    }
+    return trendingItems;
+  }
 
   Widget _buildTrendingProductCard() {
     var items = [1, 2, 3, 4, 5].map((i) {
       return Builder(builder: (BuildContext context) {
-        return _build();
+        return _build(_allShops[i]);
       });
     }).toList();
   
@@ -209,7 +217,7 @@ class _DashboardPageState extends State<DashboardPage> {
       scrollDirection: Axis.horizontal,
       );
   }
-  Widget _build() {
+  Widget _build(Shop shop) {
     return Container(
       height: ScreenUtil.getHeight(25),
       width: ScreenUtil.getWidth(35),
@@ -224,7 +232,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             child: FlutterLogo(),
             ),
-          Text("Shop Name")
+          Text(shop.businessName)
         ],
         ),
       );
@@ -312,3 +320,24 @@ class _DashboardPageState extends State<DashboardPage> {
     super.dispose();
   }
 }
+
+
+//Dummy list of shops
+List<Shop> _allShops = [
+  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
+  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+];
