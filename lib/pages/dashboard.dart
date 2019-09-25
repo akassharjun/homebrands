@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
+import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
-import 'package:homebrands/model/shop.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -115,7 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTrendingShopsCardSlider() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         displayAlertBox();
         print('tapped trending');
       },
@@ -181,15 +181,12 @@ class _DashboardPageState extends State<DashboardPage> {
         },
       ),
     );
-
-
   }
-  List<Widget> getTrendingCarouselItems(){
+
+  List<Widget> getTrendingCarouselItems() {
     List<Widget> trendingItems = [];
     for (var i = 0; i < _allShops.length; ++i) {
-      trendingItems.add(
-        _build(_allShops[i])
-      );
+      trendingItems.add(_build(_allShops[i]));
     }
     return trendingItems;
   }
@@ -200,7 +197,7 @@ class _DashboardPageState extends State<DashboardPage> {
         return _build(_allShops[i]);
       });
     }).toList();
-  
+
     return CarouselSlider(
       items: items,
       height: ScreenUtil.getHeight(28),
@@ -215,8 +212,9 @@ class _DashboardPageState extends State<DashboardPage> {
       pauseAutoPlayOnTouch: Duration(seconds: 10),
       enlargeCenterPage: false,
       scrollDirection: Axis.horizontal,
-      );
+    );
   }
+
   Widget _build(Shop shop) {
     return Container(
       height: ScreenUtil.getHeight(25),
@@ -229,15 +227,14 @@ class _DashboardPageState extends State<DashboardPage> {
             decoration: BoxDecoration(
               color: Colors.grey,
               borderRadius: ScreenUtil.getBorderRadiusCircular(10),
-              ),
-            child: FlutterLogo(),
             ),
+            child: FlutterLogo(),
+          ),
           Text(shop.businessName)
         ],
-        ),
-      );
+      ),
+    );
   }
-
 
   Container _buildFeaturedProductCard() {
     return Container(
@@ -260,13 +257,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   style: TextStyle(
                     fontSize: ScreenUtil.getTextSize(13),
                     fontWeight: FontWeight.w800,
-                    ),
                   ),
+                ),
                 SizedBox(height: ScreenUtil.getHeight(0.5)),
                 Text("*Starting at Rs.50/= onwards"),
               ],
-              ),
             ),
+          ),
           Container(
             alignment: Alignment.center,
             child: Column(
@@ -277,8 +274,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontSize: ScreenUtil.getTextSize(11),
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[800],
-                    ),
                   ),
+                ),
                 SizedBox(height: ScreenUtil.getHeight(0.25)),
                 Text(
                   "No. 1/D, John Place, Colombo 07",
@@ -286,14 +283,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontSize: ScreenUtil.getTextSize(8),
                     fontStyle: FontStyle.italic,
                     color: Colors.grey[800],
-                    ),
                   ),
+                ),
               ],
-              ),
-            )
+            ),
+          )
         ],
-        ),
-      );
+      ),
+    );
   }
 
   //method to display circular loading indicator
@@ -304,15 +301,13 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Future<void> displayAlertBox(){
+  Future<void> displayAlertBox() {
     return AlertBox.getAlertBox(
-      context: context,
-      title: 'Network Error',
-      message: 'Couldn\'t detect a stable Internet Connection',
-      flatButtonText: 'Try again'
-    );
+        context: context,
+        title: 'Network Error',
+        message: 'Couldn\'t detect a stable Internet Connection',
+        flatButtonText: 'Try again');
   }
-
 
   @override
   void dispose() {
@@ -321,23 +316,70 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-
 //Dummy list of shops
 List<Shop> _allShops = [
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
 ];
