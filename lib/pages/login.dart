@@ -13,9 +13,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final loginBloc = LoginBloc();
+  final LoginBloc loginBloc = new LoginBloc();
   TextEditingController userNameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+
+  @override
+  void initState() {
+//    loginBloc.dispatch(ValidationLoginCredentials("sureshm", "1234"));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +49,31 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    BlocBuilder(
+                    BlocListener(
                       bloc: loginBloc,
-                      builder: (BuildContext context, LoginState state) {
-                        if (state is InitialLoginState) {
-                          _buildForm(context);
+                      listener: (BuildContext context, LoginState state) {
+                        if (state is SuccessLoginState) {
+                          Navigator.of(context).pushNamed(Routes.HOME);
                         }
-                        
-                        if (state is NetworkErrorLoginState) {
-                          // show alert with state.error
-                        }
-                        
-                        if (state is NetworkBusyLoginState) {
-                          // show the loading screen
-                        }
-                        
-                        
-                        return null;
                       },
+                      child: BlocBuilder(
+                        bloc: loginBloc,
+                        builder: (BuildContext context, LoginState state) {
+                          if (state is InitialLoginState) {
+                            return _buildForm(context);
+                          }
+
+                          if (state is NetworkErrorLoginState) {
+                            // show alert with state.error
+                            return Container(child: Text(state.error));
+                          }
+
+                          if (state is NetworkBusyLoginState) {
+                            return Container(child: Text("Loading"));
+                          }
+                          return Container();
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -96,7 +109,8 @@ class _LoginPageState extends State<LoginPage> {
             textColor: kMagenta,
             backgroundColor: kWhite,
             onPressed: () {
-              Navigator.pushNamed(context, Routes.HOME);
+              loginBloc.dispatch(ValidationLoginCredentials(
+                  userNameController.text, passwordController.text));
             },
           ),
           SizedBox(
@@ -125,5 +139,14 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    userNameController.dispose();
+    passwordController.dispose();
+    loginBloc.dispose();
+    super.dispose();
   }
 }

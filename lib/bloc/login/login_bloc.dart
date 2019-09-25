@@ -17,13 +17,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    print("Im here");
     if (event is ValidationLoginCredentials) {
-      _mapValidationLoginCredentialsToState(event.username, event.password);
+      yield* _mapValidationLoginCredentialsToState(
+          event.username, event.password);
     }
   }
 
   Stream<LoginState> _mapValidationLoginCredentialsToState(
       String username, String password) async* {
+    print("hello");
     yield NetworkBusyLoginState();
     try {
       // network call
@@ -31,14 +34,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       AuthResponse authResponse =
           await networkService.validateLoginCredentials(username, password);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      
+
+      print("HI");
       prefs.setString('bearerToken', authResponse.token);
       prefs.setString('userInfo', authResponse.user.toJson().toString());
 
       yield SuccessLoginState();
     } catch (error, stacktrace) {
       // handle network call error
-      yield NetworkErrorLoginState(error: error.toString());
+      NetworkException exception = error;
+      yield NetworkErrorLoginState(error: exception.cause.toString());
     }
   }
 }
