@@ -8,6 +8,9 @@ import 'package:homebrands/widgets/alert_box.dart';
 import 'package:homebrands/pages/product_details.dart';
 import 'package:homebrands/pages/shop_list.dart';
 
+import 'category_page.dart';
+
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -48,86 +51,13 @@ class _HomePageState extends State<HomePage> {
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           DashboardPage(),
-          _buildCategoryPage(),
+          CategoryPage(),
           Container(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
-
-  //Method to build the category menu
-  Widget _buildCategoryPage() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: GridView.builder(
-        itemCount: menuItems.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        itemBuilder: (BuildContext context, int index){
-          return _buildCategoryContainer(index);
-        }
-      ),
-    );
-  }
-
-  //method to navigate to each respective category screen depending on category
-  navigateScreen(int index){
-//    if (index == 3){
-//      return AlertBox.getAlertBox(
-//        message: 'Error detected, Please Re-try',
-//        title: 'Error 404',
-//        context: context,
-//        flatButtonText: 'Try Again',
-//        onPressed: (){
-//          Navigator.pop(context);
-//        }
-//      );
-//    }
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ShopListPage(
-          category: Category(
-            name: menuItems[index].name
-          ),
-        ),
-      ),
-    );  }
-
-  //method to create a category method item
-  Widget _buildCategoryContainer(int menuItemIndex) {
-    return GestureDetector(
-      onTap: () => navigateScreen(menuItemIndex),
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Container(
-          height: ScreenUtil.getHeight(10),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: Container(
-                  child: Image.network(
-                    menuItems[menuItemIndex].thumbnail,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    menuItems[menuItemIndex].name,
-                    style: TextStyle(fontSize: ScreenUtil.getTextSize(10)),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
 
 
   Container _buildBottomNavigationBar() {
@@ -173,16 +103,4 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-//Dummy list of category items
-List<Category> menuItems = [
-  Category(name: 'Pizzas', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  Category(name: 'Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-  Category(name: 'crafts', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  Category(name: 'arts', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  Category(name: 'Flowers', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-  Category(name: 'Pottery', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  Category(name: 'Pets', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-  Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
-  Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
 
-];
