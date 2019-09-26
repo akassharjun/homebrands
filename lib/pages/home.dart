@@ -4,12 +4,8 @@ import 'package:homebrands/model/category.dart';
 import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
-import 'package:homebrands/widgets/alert_box.dart';
-import 'package:homebrands/pages/product_details.dart';
-import 'package:homebrands/pages/shop_list.dart';
 
 import 'category_page.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -59,7 +55,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
   Container _buildBottomNavigationBar() {
     return Container(
       height: ScreenUtil.getHeight(8),
@@ -101,6 +96,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
