@@ -88,6 +88,9 @@ class _ShopPageState extends State<ShopPage> {
 
   //method to navigate to relevant screen ontap of carousel
   navigateToProductDetails(int index, List<Product> productsList){
+    print(index);
+    print(productsList.toString());
+    print(productsList[index].toString());
     Navigator.push(context,
         MaterialPageRoute(
           builder: (context) => ProductDetailPage(
@@ -109,6 +112,7 @@ class _ShopPageState extends State<ShopPage> {
       onPageChanged: (index){
         setState(() {
           bestSellerCarouselIndex = index;
+          print(bestSellerCarouselIndex);
         });
       },
       items: items,
@@ -130,6 +134,7 @@ class _ShopPageState extends State<ShopPage> {
     return GestureDetector(
       onTap: (){
         navigateToProductDetails(bestSellerCarouselIndex, _allProducts);
+        print('pressed best seller');
       },
       child: Container(
         width: double.infinity,
@@ -249,6 +254,7 @@ class _ShopPageState extends State<ShopPage> {
     return GestureDetector(
       onTap: (){
         navigateToProductDetails(allProductsCarouselIndex, _allProducts);
+        print('pressed all products');
       },
       child: Container(
         height: ScreenUtil.getHeight(25),

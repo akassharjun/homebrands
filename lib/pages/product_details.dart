@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/model/category.dart';
-import 'package:homebrands/model/product.dart';
-import 'package:homebrands/utils/screen_util.dart';
-import 'package:homebrands/widgets/flat_button.dart';
+
+import '../model/product.dart';
+import '../utils/screen_util.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../widgets/flat_button.dart';
 
 class ProductDetailPage extends StatefulWidget {
 
@@ -17,14 +20,12 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  
+
   int quantity = 0;
 
   @override
   Widget build(BuildContext context) {
-
     Product _product = widget.product;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -34,94 +35,80 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: ScreenUtil.getHeight(30),
-                width: double.maxFinite,
-                child: Image.network(_product.thumbnail, fit: BoxFit.cover,),
+                height: ScreenUtil.getHeight(25),
+                width: MediaQuery.of(context).size.width,
+                child: Image.network(_product.thumbnail, fit: BoxFit.cover,)
               ),
-              Text(
-                _product.name,
-                style: TextStyle(
-                  fontSize: ScreenUtil.getTextSize(15),
-                  fontWeight: FontWeight.w600
+              Padding(
+                padding: ScreenUtil.getPadding(1, 0),
+                child: Text(
+                  _product.name,
+                  style: TextStyle(
+                    fontSize: ScreenUtil.getTextSize(12),
+                    fontWeight: FontWeight.w600
+                  ),
+                ),
+              ),
+              Padding(
+                padding: ScreenUtil.getPadding(1, 0),
+                child: Text(
+                  _product.id,
+                  style: TextStyle(
+                    fontSize: ScreenUtil.getTextSize(10),
+                    fontWeight: FontWeight.w300,
+                    color: Colors.grey.shade500
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    quantity++;
+                  });
+                  print('tapped increase');
+                },
+                child: Icon(
+                  FontAwesomeIcons.chevronUp,
+                  size: ScreenUtil.getHeight(5),
+                  color: kGrey,
                 ),
               ),
               Text(
-                _product.id,
+                quantity.toString(),
                 style: TextStyle(
-                  fontSize: ScreenUtil.getTextSize(10),
-                  color: kGrey
+                  fontSize: ScreenUtil.getTextSize(30),
+                  fontWeight: FontWeight.w700
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    quantity--;
+                  });
+                  print('tapped decrease');
+                },
+                child: Icon(
+                  FontAwesomeIcons.chevronDown,
+                  color: kGrey,
+                  size: ScreenUtil.getHeight(5),
                 ),
               ),
               SizedBox(
-                height: ScreenUtil.getWidth(5),
+                height: 10,
               ),
-              Container(
-                color: Colors.grey.shade200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      height: ScreenUtil.getHeight(6),
-                      width: ScreenUtil.getHeight(6),
-                      child: FloatingActionButton(
-                        child: Icon(
-                          Icons.add
-                        ),
-                        backgroundColor: kAshAccent,
-                        elevation: 0,
-                        onPressed: (){
-                          setState(() {
-                            quantity++;
-                            print('pressed add');
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: ScreenUtil.getWidth(5),
-                    ),
-                    Container(
-                      width: ScreenUtil.getWidth(30),
-                      child: Center(
-                        child: Text(
-                          quantity.toString(),
-                          style: TextStyle(
-                            fontSize: ScreenUtil.getTextSize(30)
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: ScreenUtil.getWidth(5),
-                    ),
-                    Container(
-                      height: ScreenUtil.getHeight(6),
-                      width: ScreenUtil.getHeight(6),
-                      child: FloatingActionButton(
-                        child: Icon(
-                            Icons.remove
-                        ),
-                        backgroundColor: kAshAccent,
-                        elevation: 0,
-                        onPressed: (){
-                          setState(() {
-                            quantity--;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Button(
+                  buttonText: 'Add to Cart',
+                  textColor: kWhite,
+                  backgroundColor: kMagenta,
+                  onPressed: (){
+                    //TODO: add functionality
+                  }
                 ),
-              ),
-              Button(
-                buttonText: 'Add to Cart',
-                textColor: kMagenta,
-                backgroundColor: kMagenta,
-                onPressed: (){
-
-                },
               )
             ],
           ),
@@ -129,4 +116,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ),
     );
   }
+}
+
+void _showToast(BuildContext context) {
+  final scaffold = Scaffold.of(context);
+  scaffold.showSnackBar(
+    SnackBar(
+      content: const Text('Added to favorite'),
+      action: SnackBarAction(
+          label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+    ),
+  );
 }
