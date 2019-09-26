@@ -59,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
 //            child: Center(child: CircularProgressIndicator()),
 //            color: Colors.grey[300],
 //          );
-        return _buildFeaturedProductCard();
+          return _buildFeaturedProductCard();
         }
 
         if (state is NetworkErrorFetchingProductsDashboardState) {
@@ -115,22 +115,9 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildTrendingShopsCardSlider() {
-<<<<<<< HEAD
-    return BlocBuilder(
-      bloc: dashboardBloc,
-      builder: (BuildContext context, DashboardState state) {
-        if (state is InitialDashboardState) {
-//            return Container(
-//              height: ScreenUtil.getHeight(30),
-//              child: Center(child: CircularProgressIndicator()),
-//              color: Colors.grey[300],
-//            );
-        return _buildTrendingProductCard();
-        }
-=======
     return GestureDetector(
       onTap: () {
-        displayAlertBox();
+//        displayAlertBox();
         print('tapped trending');
       },
       child: BlocBuilder(
@@ -143,62 +130,11 @@ class _DashboardPageState extends State<DashboardPage> {
               color: Colors.grey[300],
             );
           }
->>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
 
-        if (state is NetworkErrorFetchingShopsDashboardState) {
-          print(state.error);
-        }
+          if (state is NetworkErrorFetchingShopsDashboardState) {
+            print(state.error);
+          }
 
-<<<<<<< HEAD
-        if (state is NetworkBusyFetchingShopsDashboardState) {
-          return Container(
-            height: ScreenUtil.getHeight(25),
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-
-        if (state is TrendingShopsFetchedDashboardState) {
-          if (!state.hasData) {}
-
-          List items = state.shopList;
-
-          items = [1, 2, 3, 4, 5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(color: Colors.amber),
-                    child: Text(
-                      'text $i',
-                      style: TextStyle(fontSize: 16.0),
-                    ));
-              },
-            );
-          }).toList();
-
-          return CarouselSlider(
-            items: items,
-            height: ScreenUtil.getHeight(25),
-            aspectRatio: 16 / 9,
-            viewportFraction: 1.0,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            reverse: false,
-            autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
-            autoPlayAnimationDuration: Duration(milliseconds: 800),
-            pauseAutoPlayOnTouch: Duration(seconds: 10),
-            enlargeCenterPage: true,
-            scrollDirection: Axis.horizontal,
-          );
-        }
-        return null;
-      },
-    );
-  }
-
-=======
           if (state is NetworkBusyFetchingShopsDashboardState) {
             return Container(
               height: ScreenUtil.getHeight(25),
@@ -209,40 +145,9 @@ class _DashboardPageState extends State<DashboardPage> {
           if (state is TrendingShopsFetchedDashboardState) {
             if (!state.hasData) {}
 
-            List items = state.shopList;
-
-            items = [1, 2, 3, 4, 5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.amber),
-                      child: Text(
-                        'text $i',
-                        style: TextStyle(fontSize: 16.0),
-                      ));
-                },
-              );
-            }).toList();
-
-            return CarouselSlider(
-              items: items,
-              height: ScreenUtil.getHeight(25),
-              aspectRatio: 16 / 9,
-              viewportFraction: 1.0,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 3),
-              autoPlayAnimationDuration: Duration(milliseconds: 800),
-              pauseAutoPlayOnTouch: Duration(seconds: 10),
-              enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            );
+            return _buildTrendingProductCard();
           }
-          return null;
+          return Container();
         },
       ),
     );
@@ -255,87 +160,8 @@ class _DashboardPageState extends State<DashboardPage> {
     }
     return trendingItems;
   }
->>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
 
-  Widget _buildTrendingProductCard() {
-    var items = _allShops.toList().map((i) {
-      return Builder(builder: (BuildContext context) {
-        return _buildTrendingItem(i);
-      });
-    }).toList();
-
-    return CarouselSlider(
-      items: items,
-      height: ScreenUtil.getHeight(28),
-      aspectRatio: 16 / 9,
-      viewportFraction: 0.45,
-      initialPage: 0,
-      enableInfiniteScroll: true,
-      reverse: false,
-      autoPlay: true,
-      autoPlayInterval: Duration(seconds: 3),
-      autoPlayAnimationDuration: Duration(milliseconds: 800),
-      pauseAutoPlayOnTouch: Duration(seconds: 10),
-      enlargeCenterPage: false,
-      scrollDirection: Axis.horizontal,
-    );
-  }
-
-<<<<<<< HEAD
-  Widget _buildTrendingItem(Shop shop) {
-=======
-  Widget _build(Shop shop) {
->>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
-    return Container(
-      height: ScreenUtil.getHeight(25),
-      width: ScreenUtil.getWidth(35),
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: ScreenUtil.getHeight(22),
-            width: ScreenUtil.getWidth(35),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: ScreenUtil.getBorderRadiusCircular(10),
-            ),
-            child: FlutterLogo(),
-          ),
-          Text(shop.businessName)
-        ],
-      ),
-    );
-  }
-
-<<<<<<< HEAD
-
-  Widget _buildFeaturedProductCard() {
-    var items = _allShops.toList().map((i) {
-      return Builder(builder: (BuildContext context) {
-        return _buildFeaturedItem(i);
-      });
-    }).toList();
-
-    return CarouselSlider(
-      items: items,
-      height: ScreenUtil.getHeight(25),
-      aspectRatio: 16 / 9,
-      viewportFraction: 1.0,
-      initialPage: 0,
-      enableInfiniteScroll: true,
-      reverse: false,
-      autoPlay: true,
-      autoPlayInterval: Duration(seconds: 3),
-      autoPlayAnimationDuration: Duration(milliseconds: 800),
-      pauseAutoPlayOnTouch: Duration(seconds: 10),
-      enlargeCenterPage: true,
-      scrollDirection: Axis.horizontal,
-    );
-  }
-
-  Widget _buildFeaturedItem(Shop shop){
-=======
-  Container _buildFeaturedProductCard() {
->>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
+  Widget _buildFeaturedItem(Shop shop) {
     return Container(
       padding: ScreenUtil.getPaddingAll(10),
       height: ScreenUtil.getHeight(25),
@@ -389,6 +215,96 @@ class _DashboardPageState extends State<DashboardPage> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildTrendingItem(Shop shop) {
+    return Container(
+      height: ScreenUtil.getHeight(25),
+      width: ScreenUtil.getWidth(35),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: ScreenUtil.getHeight(22),
+            width: ScreenUtil.getWidth(35),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: ScreenUtil.getBorderRadiusCircular(10),
+            ),
+            child: FlutterLogo(),
+          ),
+          Text(shop.businessName)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTrendingProductCard() {
+    var items = _allShops.toList().map((i) {
+      return Builder(builder: (BuildContext context) {
+        return _buildTrendingItem(i);
+      });
+    }).toList();
+
+    return CarouselSlider(
+      items: items,
+      height: ScreenUtil.getHeight(28),
+      aspectRatio: 16 / 9,
+      viewportFraction: 0.45,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      reverse: false,
+      autoPlay: true,
+      autoPlayInterval: Duration(seconds: 3),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      pauseAutoPlayOnTouch: Duration(seconds: 10),
+      enlargeCenterPage: false,
+      scrollDirection: Axis.horizontal,
+    );
+  }
+
+  Widget _build(Shop shop) {
+    return Container(
+      height: ScreenUtil.getHeight(25),
+      width: ScreenUtil.getWidth(35),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: ScreenUtil.getHeight(22),
+            width: ScreenUtil.getWidth(35),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: ScreenUtil.getBorderRadiusCircular(10),
+            ),
+            child: FlutterLogo(),
+          ),
+          Text(shop.businessName)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeaturedProductCard() {
+    var items = _allShops.toList().map((i) {
+      return Builder(builder: (BuildContext context) {
+        return _buildFeaturedItem(i);
+      });
+    }).toList();
+
+    return CarouselSlider(
+      items: items,
+      height: ScreenUtil.getHeight(25),
+      aspectRatio: 16 / 9,
+      viewportFraction: 1.0,
+      initialPage: 0,
+      enableInfiniteScroll: true,
+      reverse: false,
+      autoPlay: true,
+      autoPlayInterval: Duration(seconds: 3),
+      autoPlayAnimationDuration: Duration(milliseconds: 800),
+      pauseAutoPlayOnTouch: Duration(seconds: 10),
+      enlargeCenterPage: true,
+      scrollDirection: Axis.horizontal,
     );
   }
 

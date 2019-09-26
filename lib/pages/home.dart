@@ -184,4 +184,5 @@ List<Category> menuItems = [
   Category(name: 'Pets', thumbnail: 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
   Category(name: 'Jonnies Cookies', thumbnail: 'https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567__340.jpg'),
   Category(name: 'Archies Buns', thumbnail: 'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+
 ];
