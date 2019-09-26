@@ -86,7 +86,7 @@ class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
                           buttonText: 'REGISTER BUSINESS',
                           textColor: kMagenta,
                           backgroundColor: kWhite,
-                          onPressed: (){Navigator.pushNamed(context, Routes.HOME);},
+                          onPressed: (){Navigator.pushNamed(context, Routes.BUSINESS_REGISTRATION_CONFIRMATION);},
                         ),
                         SizedBox(
                           height: ScreenUtil.getHeight(1),

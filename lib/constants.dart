@@ -15,4 +15,7 @@ class Routes {
   static const LOGIN = '/login';
   static const SIGN_UP = '/signup';
   static const BUSINESS_REGISTRATION = '/business_registration';
+  static const BUSINESS_REGISTRATION_CONFIRMATION = '/business_registration_confirmation';
+  static const PRODUCT_DETAILS = '/product_details';
+  static const SHOP_DETAILS = '/product_details';
 }

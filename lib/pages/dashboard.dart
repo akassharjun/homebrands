@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
+import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
-import 'package:homebrands/model/shop.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -115,6 +115,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildTrendingShopsCardSlider() {
+<<<<<<< HEAD
     return BlocBuilder(
       bloc: dashboardBloc,
       builder: (BuildContext context, DashboardState state) {
@@ -126,11 +127,29 @@ class _DashboardPageState extends State<DashboardPage> {
 //            );
         return _buildTrendingProductCard();
         }
+=======
+    return GestureDetector(
+      onTap: () {
+        displayAlertBox();
+        print('tapped trending');
+      },
+      child: BlocBuilder(
+        bloc: dashboardBloc,
+        builder: (BuildContext context, DashboardState state) {
+          if (state is InitialDashboardState) {
+            return Container(
+              height: ScreenUtil.getHeight(30),
+              child: Center(child: CircularProgressIndicator()),
+              color: Colors.grey[300],
+            );
+          }
+>>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
 
         if (state is NetworkErrorFetchingShopsDashboardState) {
           print(state.error);
         }
 
+<<<<<<< HEAD
         if (state is NetworkBusyFetchingShopsDashboardState) {
           return Container(
             height: ScreenUtil.getHeight(25),
@@ -179,6 +198,64 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+=======
+          if (state is NetworkBusyFetchingShopsDashboardState) {
+            return Container(
+              height: ScreenUtil.getHeight(25),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+
+          if (state is TrendingShopsFetchedDashboardState) {
+            if (!state.hasData) {}
+
+            List items = state.shopList;
+
+            items = [1, 2, 3, 4, 5].map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(color: Colors.amber),
+                      child: Text(
+                        'text $i',
+                        style: TextStyle(fontSize: 16.0),
+                      ));
+                },
+              );
+            }).toList();
+
+            return CarouselSlider(
+              items: items,
+              height: ScreenUtil.getHeight(25),
+              aspectRatio: 16 / 9,
+              viewportFraction: 1.0,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 3),
+              autoPlayAnimationDuration: Duration(milliseconds: 800),
+              pauseAutoPlayOnTouch: Duration(seconds: 10),
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+            );
+          }
+          return null;
+        },
+      ),
+    );
+  }
+
+  List<Widget> getTrendingCarouselItems() {
+    List<Widget> trendingItems = [];
+    for (var i = 0; i < _allShops.length; ++i) {
+      trendingItems.add(_build(_allShops[i]));
+    }
+    return trendingItems;
+  }
+>>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
 
   Widget _buildTrendingProductCard() {
     var items = _allShops.toList().map((i) {
@@ -186,7 +263,7 @@ class _DashboardPageState extends State<DashboardPage> {
         return _buildTrendingItem(i);
       });
     }).toList();
-  
+
     return CarouselSlider(
       items: items,
       height: ScreenUtil.getHeight(28),
@@ -201,10 +278,14 @@ class _DashboardPageState extends State<DashboardPage> {
       pauseAutoPlayOnTouch: Duration(seconds: 10),
       enlargeCenterPage: false,
       scrollDirection: Axis.horizontal,
-      );
+    );
   }
 
+<<<<<<< HEAD
   Widget _buildTrendingItem(Shop shop) {
+=======
+  Widget _build(Shop shop) {
+>>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
     return Container(
       height: ScreenUtil.getHeight(25),
       width: ScreenUtil.getWidth(35),
@@ -216,15 +297,16 @@ class _DashboardPageState extends State<DashboardPage> {
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: ScreenUtil.getBorderRadiusCircular(10),
-              ),
-            child: FlutterLogo(),
             ),
+            child: FlutterLogo(),
+          ),
           Text(shop.businessName)
         ],
-        ),
-      );
+      ),
+    );
   }
 
+<<<<<<< HEAD
 
   Widget _buildFeaturedProductCard() {
     var items = _allShops.toList().map((i) {
@@ -251,6 +333,9 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildFeaturedItem(Shop shop){
+=======
+  Container _buildFeaturedProductCard() {
+>>>>>>> 76355cbd70d6cdc544b31dad6105927523aadf5c
     return Container(
       padding: ScreenUtil.getPaddingAll(10),
       height: ScreenUtil.getHeight(25),
@@ -271,13 +356,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   style: TextStyle(
                     fontSize: ScreenUtil.getTextSize(13),
                     fontWeight: FontWeight.w800,
-                    ),
                   ),
+                ),
                 SizedBox(height: ScreenUtil.getHeight(0.5)),
                 Text("*Starting at Rs.50/= onwards"),
               ],
-              ),
             ),
+          ),
           Container(
             alignment: Alignment.center,
             child: Column(
@@ -288,8 +373,8 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontSize: ScreenUtil.getTextSize(11),
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[800],
-                    ),
                   ),
+                ),
                 SizedBox(height: ScreenUtil.getHeight(0.25)),
                 Text(
                   "No. 1/D, John Place, Colombo 07",
@@ -297,14 +382,14 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontSize: ScreenUtil.getTextSize(8),
                     fontStyle: FontStyle.italic,
                     color: Colors.grey[800],
-                    ),
                   ),
+                ),
               ],
-              ),
-            )
+            ),
+          )
         ],
-        ),
-      );
+      ),
+    );
   }
 
   //method to display circular loading indicator
@@ -315,15 +400,13 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Future<void> displayAlertBox(){
+  Future<void> displayAlertBox() {
     return AlertBox.getAlertBox(
-      context: context,
-      title: 'Network Error',
-      message: 'Couldn\'t detect a stable Internet Connection',
-      flatButtonText: 'Try again'
-    );
+        context: context,
+        title: 'Network Error',
+        message: 'Couldn\'t detect a stable Internet Connection',
+        flatButtonText: 'Try again');
   }
-
 
   @override
   void dispose() {
@@ -332,23 +415,70 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-
 //Dummy list of shops
 List<Shop> _allShops = [
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: 'Card/Cash',
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: 'Card/Cash',
+  ),
 ];

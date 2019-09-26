@@ -4,9 +4,11 @@ import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/pages/login.dart';
 import 'pages/sign_up.dart';
 import 'pages/business_registration.dart';
-
+import 'pages/business_registration_confirmation.dart';
 import 'pages/login.dart';
 import 'pages/splash_screen.dart';
+import 'pages/shop_details.dart';
+import 'pages/product_details.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -29,6 +31,18 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.BUSINESS_REGISTRATION:
       return MaterialPageRoute(
         builder: (context) => BusinessRegistrationPage(),
+      );
+    case Routes.BUSINESS_REGISTRATION_CONFIRMATION:
+      return MaterialPageRoute(
+        builder: (context) => BusinessRegistrationConfirmationPage(),
+      );
+    case Routes.PRODUCT_DETAILS:
+      return MaterialPageRoute(
+        builder: (context) => ProductDetailPage(),
+    );
+    case Routes.SHOP_DETAILS:
+      return MaterialPageRoute(
+        builder: (context) => ShopPage(),
       );
     default:
       return MaterialPageRoute(
