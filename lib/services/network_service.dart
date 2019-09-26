@@ -63,9 +63,9 @@ class NetworkService extends Api {
       url,
       headers: await _getBearerToken(),
     );
+    print(response.body);
     if (response.statusCode == 200) {
-//      return CategoryList.fromJson(response.body.toString());
-      return null;
+      return CategoryList.fromJson(response.body.toString());
     } else {
       throw NetworkException(response.body);
     }

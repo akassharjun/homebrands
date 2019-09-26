@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:homebrands/constants.dart';
-class AlertBox{
+class ErrorDialog{
   static Future<void> getAlertBox({BuildContext context, Function onPressed, String title, String message, String flatButtonText}) async {
     return showDialog<void>(
       context: context,

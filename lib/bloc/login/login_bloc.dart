@@ -22,6 +22,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       yield* _mapValidationLoginCredentialsToState(
           event.username, event.password);
     }
+    if (event is CheckIfUserIsAlreadyLoggedIn) {
+      yield* _mapCheckIfUserIsAlreadyLoggedInToState(
+         );
+    }
+  }
+  
+  Stream<LoginState> _mapCheckIfUserIsAlreadyLoggedInToState(
+      ) async* {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool hasUserLoggedIn = prefs.getBool('signedIn');
+    
+    if (hasUserLoggedIn) {
+      yield UserAlreadyLoggedInState();
+    } else {
+      yield InitialLoginState();
+    }
+  
   }
 
   Stream<LoginState> _mapValidationLoginCredentialsToState(
@@ -38,6 +55,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       print("HI");
       prefs.setString('bearerToken', authResponse.token);
       prefs.setString('userInfo', authResponse.user.toJson().toString());
+      prefs.setBool('signedIn', true);
 
       yield SuccessLoginState();
     } catch (error, stacktrace) {

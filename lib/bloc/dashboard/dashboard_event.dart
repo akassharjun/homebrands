@@ -5,6 +5,6 @@ abstract class DashboardEvent extends Equatable {
   DashboardEvent([List props = const []]) : super(props);
 }
 
-class FetchFeaturedProducts extends DashboardEvent {}
+class FetchFeaturedShops extends DashboardEvent {}
 
 class FetchTrendingShops extends DashboardEvent {}

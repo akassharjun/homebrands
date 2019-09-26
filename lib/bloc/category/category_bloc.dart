@@ -15,15 +15,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryState get initialState => InitialCategoryState();
   
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {
     if (event is FetchCategoryList) {
-      _mapCategoryListToState();
+      yield* _mapCategoryListToState();
     }
   }
 

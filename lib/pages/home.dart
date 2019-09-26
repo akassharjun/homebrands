@@ -5,7 +5,7 @@ import 'package:homebrands/pages/dashboard.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 
-import 'category_page.dart';
+import 'category.dart';
 
 class HomePage extends StatefulWidget {
   @override

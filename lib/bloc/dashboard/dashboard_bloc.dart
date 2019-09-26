@@ -17,7 +17,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   @override
   Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
-    if (event is FetchFeaturedProducts) {
+    if (event is FetchFeaturedShops) {
       yield* _mapFetchFeaturedProductsToState();
     }
     if (event is FetchTrendingShops) {

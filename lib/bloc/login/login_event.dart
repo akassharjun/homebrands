@@ -11,3 +11,7 @@ class ValidationLoginCredentials extends LoginEvent {
 
   ValidationLoginCredentials(this.username, this.password);
 }
+
+class CheckIfUserIsAlreadyLoggedIn extends LoginEvent {
+
+}

@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:homebrands/bloc/login/login_bloc.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/screen_util.dart';
+import 'package:homebrands/widgets/alert_box.dart';
 import 'package:homebrands/widgets/clickable_text.dart';
 import 'package:homebrands/widgets/flat_button.dart';
+import 'package:homebrands/widgets/progress_indicator.dart';
 import 'package:homebrands/widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
 //    loginBloc.dispatch(ValidationLoginCredentials("sureshm", "1234"));
+    loginBloc.dispatch(CheckIfUserIsAlreadyLoggedIn());
     super.initState();
   }
 
@@ -55,6 +58,9 @@ class _LoginPageState extends State<LoginPage> {
                         if (state is SuccessLoginState) {
                           Navigator.of(context).pushNamed(Routes.HOME);
                         }
+                        if (state is UserAlreadyLoggedInState) {
+                          Navigator.of(context).pushNamed(Routes.HOME);
+                        }
                       },
                       child: BlocBuilder(
                         bloc: loginBloc,
@@ -64,12 +70,19 @@ class _LoginPageState extends State<LoginPage> {
                           }
 
                           if (state is NetworkErrorLoginState) {
-                            // show alert with state.error
-                            return Container(child: Text(state.error));
+                            ErrorDialog.getAlertBox(
+                                context: context,
+                                onPressed: () {
+//                                  categoryBloc.dispatch(FetchCategoryList());
+                                },
+                                title: "ERROR",
+                                message: state.error,
+                                flatButtonText: "OK");
+                            return _buildForm(context);
                           }
 
                           if (state is NetworkBusyLoginState) {
-                            return Container(child: Text("Loading"));
+                            return LoadingWidget();
                           }
                           return Container();
                         },

@@ -19,3 +19,5 @@ class NetworkErrorLoginState extends LoginState {
 }
 
 class SuccessLoginState extends LoginState {}
+
+class UserAlreadyLoggedInState extends LoginState {}

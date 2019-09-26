@@ -5,6 +5,7 @@ import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
 import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
+import 'package:homebrands/widgets/progress_indicator.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -53,13 +54,7 @@ class _DashboardPageState extends State<DashboardPage> {
       bloc: dashboardBloc,
       builder: (BuildContext context, DashboardState state) {
         if (state is InitialDashboardState) {
-//          return _buildFeaturedProductCard();
-//          return Container(
-//            height: ScreenUtil.getHeight(25),
-//            child: Center(child: CircularProgressIndicator()),
-//            color: Colors.grey[300],
-//          );
-          return _buildFeaturedProductCard();
+          return LoadingWidget();
         }
 
         if (state is NetworkErrorFetchingProductsDashboardState) {
@@ -74,24 +69,11 @@ class _DashboardPageState extends State<DashboardPage> {
         }
 
         if (state is FeaturedProductsFetchedDashboardState) {
-          if (!state.hasData) {}
+          if (!state.hasData) {
+            return Container(child: Text("No Data"));
+          }
 
           List items = state.productList;
-
-          items = [1, 2, 3, 4, 5].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(color: Colors.amber),
-                    child: Text(
-                      'text $i',
-                      style: TextStyle(fontSize: 16.0),
-                    ));
-              },
-            );
-          }).toList();
 
           return CarouselSlider(
             items: items,
@@ -109,7 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
             scrollDirection: Axis.horizontal,
           );
         }
-        return null;
+        return LoadingWidget();
       },
     );
   }
@@ -124,26 +106,28 @@ class _DashboardPageState extends State<DashboardPage> {
         bloc: dashboardBloc,
         builder: (BuildContext context, DashboardState state) {
           if (state is InitialDashboardState) {
-            return Container(
-              height: ScreenUtil.getHeight(30),
-              child: Center(child: CircularProgressIndicator()),
-              color: Colors.grey[300],
-            );
+            return LoadingWidget();
           }
 
           if (state is NetworkErrorFetchingShopsDashboardState) {
-            print(state.error);
+            ErrorDialog.getAlertBox(
+                context: context,
+                onPressed: () {
+                  dashboardBloc.dispatch(FetchFeaturedShops());
+                },
+                title: "ERROR",
+                message: state.error,
+                flatButtonText: "Try Again!");
           }
 
           if (state is NetworkBusyFetchingShopsDashboardState) {
-            return Container(
-              height: ScreenUtil.getHeight(25),
-              child: Center(child: CircularProgressIndicator()),
-            );
+            return LoadingWidget();
           }
 
           if (state is TrendingShopsFetchedDashboardState) {
-            if (!state.hasData) {}
+            if (!state.hasData) {
+              return Container(child: Text("No Data"));
+            }
 
             return _buildTrendingProductCard();
           }
@@ -309,15 +293,12 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   //method to display circular loading indicator
-  Widget showLoadingIndicator() {
-    return Container(
-      height: ScreenUtil.getHeight(25),
-      child: Center(child: CircularProgressIndicator()),
-    );
-  }
+//  Widget showLoadingIndicator() {
+//    return
+//  }
 
   Future<void> displayAlertBox() {
-    return AlertBox.getAlertBox(
+    return ErrorDialog.getAlertBox(
         context: context,
         title: 'Network Error',
         message: 'Couldn\'t detect a stable Internet Connection',
