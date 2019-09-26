@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
+import 'package:homebrands/pages/favourites.dart';
 import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/pages/login.dart';
 import 'pages/sign_up.dart';
@@ -39,6 +40,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.PRODUCT_DETAILS:
       return MaterialPageRoute(
         builder: (context) => ProductDetailPage(),
+    );
+    case Routes.FAVOURITES:
+      return MaterialPageRoute(
+        builder: (context) => FavouritesPage(),
     );
     case Routes.SHOP_DETAILS:
       return MaterialPageRoute(

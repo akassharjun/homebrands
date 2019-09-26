@@ -18,4 +18,5 @@ class Routes {
   static const BUSINESS_REGISTRATION_CONFIRMATION = '/business_registration_confirmation';
   static const PRODUCT_DETAILS = '/product_details';
   static const SHOP_DETAILS = '/product_details';
+  static const FAVOURITES = '/favourites';
 }

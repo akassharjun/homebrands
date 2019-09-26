@@ -6,6 +6,7 @@ import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 
 import 'category.dart';
+import 'favourites.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           DashboardPage(),
           CategoryPage(),
-          Container(),
+          FavouritesPage(),
         ],
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
