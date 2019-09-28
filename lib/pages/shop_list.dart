@@ -1,67 +1,109 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homebrands/bloc/shop_list/shop_list_bloc.dart';
 import 'package:homebrands/model/category.dart';
 import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/pages/shop_details.dart';
-import 'package:homebrands/constants.dart';
 import 'package:homebrands/utils/screen_util.dart';
+import 'package:homebrands/widgets/alert_box.dart';
+import 'package:homebrands/widgets/progress_indicator.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'dart:math';
 
 class ShopListPage extends StatefulWidget {
-
   final Category category;
 
-  ShopListPage({
-    this.category
-  });
+  ShopListPage({this.category});
 
   @override
   _ShopListPageState createState() => _ShopListPageState();
 }
 
 class _ShopListPageState extends State<ShopListPage> {
+  final shopListBloc = ShopListBloc();
+
+  @override
+  void initState() {
+    Category _category = widget.category;
+    shopListBloc.dispatch(FetchShopList(_category.name));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     Category _category = widget.category;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
-          _category.name
-        ),
+        title: Text(_category.name),
       ),
       body: SafeArea(
-        child: GridView.builder(
-          itemCount: _allShops.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (BuildContext context, int index){
-            return _buildShopContainer(index);
+        child: BlocListener(
+          bloc: shopListBloc,
+          listener: (BuildContext context, ShopListState state) {
+            if (state is NetworkErrorShopListState) {
+              ErrorDialog.getAlertBox(
+                  context: context,
+                  onPressed: () {
+                    shopListBloc.dispatch(FetchShopList(_category.name));
+                  },
+                  title: "ERROR",
+                  message: state.error,
+                  flatButtonText: "Try Again!");
+            }
           },
+          child: BlocBuilder(
+            bloc: shopListBloc,
+            builder: (BuildContext context, ShopListState state) {
+              if (state is InitialShopListState) {
+                return LoadingWidget();
+              }
+              if (state is NetworkErrorShopListState) {
+                return LoadingWidget();
+              }
+              if (state is NetworkBusyShopListState) {
+                return LoadingWidget();
+              }
+              if (state is ShopListFetchedShopListState) {
+                _allShops = state.shopList;
+                return _buildShopListGrid();
+              }
+              return LoadingWidget();
+            },
+          ),
         ),
       ),
     );
   }
 
-  _viewShop(int index){
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ShopPage(
-          shop: Shop(
-            businessName: _allShops[index].businessName,
-            paymentMethod: _allShops[index].paymentMethod,
-          ),
-        )
-      )
+  GridView _buildShopListGrid() {
+    return GridView.builder(
+      itemCount: _allShops.length,
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      itemBuilder: (BuildContext context, int index) {
+        return _buildShopContainer(index);
+      },
     );
   }
 
-  Widget _buildShopContainer(int shopIndex){
+  _viewShop(int index) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ShopPage(
+                  shop: Shop(
+                    businessName: _allShops[index].businessName,
+                    paymentMethod: _allShops[index].paymentMethod,
+                  ),
+                )));
+  }
+
+  Widget _buildShopContainer(int shopIndex) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         _viewShop(shopIndex);
       },
       child: Card(
@@ -73,7 +115,10 @@ class _ShopListPageState extends State<ShopListPage> {
               child: Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
-                child: Image.network('https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', fit: BoxFit.cover,),
+                child: Image.network(
+                  _allShops[shopIndex].image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(
@@ -81,9 +126,8 @@ class _ShopListPageState extends State<ShopListPage> {
                 child: Text(
                   _allShops[shopIndex].businessName,
                   style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: ScreenUtil.getTextSize(11)
-                  ),
+                      fontWeight: FontWeight.w600,
+                      fontSize: ScreenUtil.getTextSize(11)),
                 ),
               ),
             ),
@@ -94,7 +138,7 @@ class _ShopListPageState extends State<ShopListPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      _allShops[shopIndex].paymentMethod,
+                      _allShops[shopIndex].paymentMethod.toString(),
                     ),
                     SizedBox(
                       height: ScreenUtil.getHeight(0.5),
@@ -116,27 +160,75 @@ class _ShopListPageState extends State<ShopListPage> {
 }
 
 //method to generate random star ratings
-int getStarRating(){
+int getStarRating() {
   var range = Random();
   return range.nextInt(6);
 }
 
 //Dummy list of shops
 List<Shop> _allShops = [
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Enzo pizzarie', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Kashu nuts', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Colombo farm shop', paymentMethod: 'Card/Cash',),
-  Shop(businessName: 'Factory Outlet', paymentMethod: 'Card/Cash',),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Enzo pizzarie',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Kashu nuts',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Colombo farm shop',
+    paymentMethod: "Cash/Card",
+  ),
+  Shop(
+    businessName: 'Factory Outlet',
+    paymentMethod: "Cash/Card",
+  ),
 ];

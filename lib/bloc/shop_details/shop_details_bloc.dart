@@ -17,7 +17,7 @@ class ShopDetailsBloc extends Bloc<ShopDetailsEvent, ShopDetailsState> {
   @override
   Stream<ShopDetailsState> mapEventToState(ShopDetailsEvent event) async* {
     if (event is FetchProductList) {
-      _mapFetchProductListToState(event.shopId);
+      yield* _mapFetchProductListToState(event.shopId);
     }
   }
 

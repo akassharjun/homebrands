@@ -78,7 +78,12 @@ class NetworkService extends Api {
       url,
       headers: await _getBearerToken(),
     );
+    print("SHOP LIST");
+    print(response.body);
     if (response.statusCode == 200) {
+      print("SHOP LIST NOW");
+      print(ShopList.fromJson(response.body.toString()).shopList);
+      print(ShopList.fromJson(response.body.toString()).shopList.toString());
       return ShopList.fromJson(response.body.toString());
     } else {
       throw NetworkException(response.body);

@@ -17,7 +17,7 @@ class ShopListBloc extends Bloc<ShopListEvent, ShopListState> {
   @override
   Stream<ShopListState> mapEventToState(ShopListEvent event) async* {
     if (event is FetchShopList) {
-      _mapShopListToState(event.categoryName);
+      yield* _mapShopListToState(event.categoryName);
     }
   }
 
@@ -28,9 +28,10 @@ class ShopListBloc extends Bloc<ShopListEvent, ShopListState> {
       NetworkService networkService = NetworkService();
       ShopList shopList =
           await networkService.getShopsByCategoryName(categoryName);
-      yield ShopListFetchedShopListState(shopList: shopList.shop);
+      yield ShopListFetchedShopListState(shopList: shopList.shopList);
     } catch (error, stacktrace) {
       yield NetworkErrorShopListState(error: error.toString());
+//      yield ShopListFetchedShopListState();
     }
   }
 }

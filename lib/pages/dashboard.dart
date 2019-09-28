@@ -106,18 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
         bloc: dashboardBloc,
         builder: (BuildContext context, DashboardState state) {
           if (state is InitialDashboardState) {
-            return LoadingWidget();
-          }
-
-          if (state is NetworkErrorFetchingShopsDashboardState) {
-            ErrorDialog.getAlertBox(
-                context: context,
-                onPressed: () {
-                  dashboardBloc.dispatch(FetchFeaturedShops());
-                },
-                title: "ERROR",
-                message: state.error,
-                flatButtonText: "Try Again!");
+            return _buildTrendingProductCard();
           }
 
           if (state is NetworkBusyFetchingShopsDashboardState) {
@@ -316,66 +305,66 @@ class _DashboardPageState extends State<DashboardPage> {
 List<Shop> _allShops = [
   Shop(
     businessName: 'Enzo pizzarie',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Kashu nuts',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Colombo farm shop',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Factory Outlet',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Enzo pizzarie',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Kashu nuts',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Colombo farm shop',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Factory Outlet',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Enzo pizzarie',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Kashu nuts',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Colombo farm shop',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Factory Outlet',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Enzo pizzarie',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Kashu nuts',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Colombo farm shop',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
   Shop(
     businessName: 'Factory Outlet',
-    paymentMethod: 'Card/Cash',
+    paymentMethod: "Cash/Card",
   ),
 ];

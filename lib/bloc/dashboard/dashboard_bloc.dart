@@ -44,7 +44,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       // network call
       NetworkService networkService = NetworkService();
       ShopList shops = await networkService.getShops();
-      yield TrendingShopsFetchedDashboardState(shopList: shops.shop);
+      yield TrendingShopsFetchedDashboardState(shopList: shops.shopList);
     } catch (error, stacktrace) {
       // handle network call error
       yield NetworkErrorFetchingShopsDashboardState(error: error.toString());
