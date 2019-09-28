@@ -139,14 +139,14 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushNamed(context, Routes.SIGN_UP);
                 },
               ),
-              Text(' or ', style: TextStyle(color: kWhite)),
-              ClickableText(
-                text: 'Register your Business',
-                onTap: () {
-                  print('clicked register');
-                  Navigator.pushNamed(context, Routes.BUSINESS_REGISTRATION);
-                },
-              ),
+//              Text(' or ', style: TextStyle(color: kWhite)),
+//              ClickableText(
+//                text: 'Register your Business',
+//                onTap: () {
+//                  print('clicked register');
+//                  Navigator.pushNamed(context, Routes.BUSINESS_REGISTRATION);
+//                },
+//              ),
             ],
           )
         ],

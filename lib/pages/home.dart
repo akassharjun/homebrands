@@ -31,14 +31,26 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.grey[50],
         elevation: 0,
+        leading: GestureDetector(
+          child: Icon(
+            Icons.menu,
+            color: kAsh,
+          ),
+        ),
         actions: <Widget>[
-          Container(
-            padding: ScreenUtil.getPaddingAll(5),
-            margin: ScreenUtil.getPaddingAll(10),
-            child: Icon(Icons.person),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: kMagenta,
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context,Routes.USER_PROFILE);
+              print('pressed profile icon');
+            },
+            child: Container(
+              padding: ScreenUtil.getPaddingAll(5),
+              margin: ScreenUtil.getPaddingAll(10),
+              child: Center(child: Icon(Icons.person)),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: kMagenta,
+              ),
             ),
           ),
         ],

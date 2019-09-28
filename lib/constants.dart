@@ -19,4 +19,5 @@ class Routes {
   static const PRODUCT_DETAILS = '/product_details';
   static const SHOP_DETAILS = '/product_details';
   static const FAVOURITES = '/favourites';
+  static const USER_PROFILE = '/user_profile';
 }

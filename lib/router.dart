@@ -3,6 +3,7 @@ import 'package:homebrands/constants.dart';
 import 'package:homebrands/pages/favourites.dart';
 import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/pages/login.dart';
+import 'package:homebrands/pages/user_profile.dart';
 import 'pages/sign_up.dart';
 import 'pages/business_registration.dart';
 import 'pages/business_registration_confirmation.dart';
@@ -48,6 +49,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.SHOP_DETAILS:
       return MaterialPageRoute(
         builder: (context) => ShopPage(),
+      );
+    case Routes.USER_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => UserProfilePage(),
       );
     default:
       return MaterialPageRoute(

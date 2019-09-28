@@ -5,7 +5,7 @@ class ErrorDialog{
   static Future<void> getAlertBox({BuildContext context, Function onPressed, String title, String message, String flatButtonText}) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         //TODO
         return AlertDialog(

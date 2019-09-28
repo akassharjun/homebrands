@@ -6,6 +6,7 @@ import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
 import 'package:homebrands/widgets/progress_indicator.dart';
+import 'package:homebrands/widgets/heading.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -24,30 +25,15 @@ class _DashboardPageState extends State<DashboardPage> {
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil.getHeight(0.25)),
-        _buildTitle("Featured Products"),
+        Heading.buildTitle("Featured Products"),
         _buildFeaturedProductsCardSlider(),
         SizedBox(height: ScreenUtil.getHeight(0.8)),
-        _buildTitle("Trending Shops"),
+        Heading.buildTitle("Trending Shops"),
         _buildTrendingShopsCardSlider()
       ],
     );
   }
 
-  Align _buildTitle(String title) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        padding: ScreenUtil.getPaddingAll(8),
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: ScreenUtil.getTextSize(12),
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildFeaturedProductsCardSlider() {
     return BlocBuilder(
