@@ -21,5 +21,7 @@ class Routes {
   static const FAVOURITES = '/favourites';
   static const USER_PROFILE = '/user_profile';
   static const BUSINESS_PROFILE = '/business_profile';
-//  static const BUSINESS_PROFILE_CONFIRMATION = '/user_profile';
+  static const REVIEWS = '/reviews';
+  static const MENU = '/menu';
+  static const ORDERS = '/orders';
 }
