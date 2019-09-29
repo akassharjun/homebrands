@@ -315,6 +315,9 @@ class _ShopPageState extends State<ShopPage> {
                         fit: BoxFit.cover)),
               ),
             ),
+            SizedBox(
+              height: ScreenUtil.getHeight(1),
+            ),
             Text(product.name)
           ],
         ),
@@ -328,8 +331,10 @@ class _ShopPageState extends State<ShopPage> {
       return sweetsList;
     } else if (shop == 'Charamel Eats'){
       print('Charamel Eats');
+      return caramelList;
     } else if (shop == 'Yei\'s Brownies'){
       print('Yei\'s Brownies');
+      return browniesList;
     } else if (shop == 'Charamel Eats'){
       print('Charamel Eats');
     } else if (shop == 'Charamel Eats'){
@@ -376,21 +381,74 @@ List<Product> sweetsList = [
       id: 'K2342347'),
   Product(
       price: Price(currency: 'LKR', amount: 700),
-      name: 'mixed nuts',
-      thumbnail:
-          'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
+      name: 'Skittle',
+      thumbnail:'http://cdn.shopify.com/s/files/1/1002/6470/articles/American_Candy_vs_British_Sweets_0e38d923-039a-48a4-b498-a8d152b46bde_600x.jpg?v=1453912986',
       id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 800),
-      name: 'Spicy cashew nuts',
+      name: 'Marbles',
+      id: 'K239444',
       thumbnail:
-          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/71cM0JmxvZL._SX425_.jpg'),
+
   Product(
       price: Price(currency: 'LKR', amount: 900),
-      name: 'macadamie nuts',
+      name: 'Licorice',
       thumbnail:
-          'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDXPohYW1dj_-SLIjmIyMDir4L2rTVbaFA2wu1GsXkwgUNTXUg',
+      id: 'K1234567'),
+];
+
+List<Product> caramelList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Caramel cup',
+      thumbnail:
+          'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2015/09/Homemade-Salted-Caramel-Sauce-1-4.jpg?fit=1360%2C1360&ssl=1',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Gummy Caramel',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA9yK6tF-1Ah8eBQ6GZyd6frr57hFuZWQQIXOTV6CLlZwwqhVHQA',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'Caramel Pie',
+      thumbnail:'https://d1doqjmisr497k.cloudfront.net/-/media/mccormick-us/recipes/mccormick/n/800/no-bake-salted-caramel-pie.jpg',
+      id: 'K1234567'),
+  Product(
+      price: Price(currency: 'LKR', amount: 800),
+      name: 'ButterScotch cup',
+      id: 'K239444',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziugPRBvHD3kQrHZuzUU34sE0yhbtAfeC_7f-ZT_DhDaLznu7-Q'),
+
+  Product(
+      price: Price(currency: 'LKR', amount: 900),
+      name: 'Caramel Chocolate cups',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOMa7qw05vb9rc6RDiSeqbMeBe9fBgv_SaeeY8M_UtRi7rhWKT',
+      id: 'K1234567'),
+];
+
+List<Product> browniesList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Classic Brownies',
+      thumbnail:
+          'https://www.averiecooks.com/wp-content/uploads/2019/04/boyfriendbrownies-6.jpg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Fudgy Brownies',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3qZH5cphRCna9HvsrpRdg9ouvbmUgKU-jESJz32SeNH_crW5hQ',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXbQsMMg5uTH4Ms4wuq6uYk2XTkv2AknrEFthfvzjCI3qMevMK',
       id: 'K1234567'),
 ];
 
