@@ -53,16 +53,16 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text("Suresh Foods"),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, Routes.BUSINESS_PROFILE);
+                print('pressed suresh foods');
               },
             ),
             Divider(),
             ListTile(
               title: Text('Ape Kade'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, Routes.BUSINESS_PROFILE);
+                print('pressed suresh foods');
               },
             ),
           ],
