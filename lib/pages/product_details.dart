@@ -17,7 +17,15 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  int quantity = 0;
+  int quantity = 1;
+  int amount = 0;
+
+  @override
+  void initState() {
+    Product _product = widget.product;
+    amount = _product.price.amount;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +55,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              Padding(
-                padding: ScreenUtil.getPadding(1, 0),
-                child: Text(
-                  _product.id,
-                  style: TextStyle(
-                      fontSize: ScreenUtil.getTextSize(10),
-                      fontWeight: FontWeight.w300,
-                      color: Colors.grey.shade500),
-                ),
+              Text(
+                "Price : ${amount.toString()}",
+                style: TextStyle(
+                    fontSize: ScreenUtil.getTextSize(12),
+                    fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 25,
               ),
               GestureDetector(
                 onTap: () {
                   setState(() {
                     quantity++;
+                    amount = _product.price.amount * quantity;
                   });
                   print('tapped increase');
                 },
@@ -80,6 +88,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 onTap: () {
                   setState(() {
                     quantity--;
+                    amount = _product.price.amount * quantity;
                   });
                   print('tapped decrease');
                 },

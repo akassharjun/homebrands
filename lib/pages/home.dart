@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             DrawerHeader(
               child: Center(
                   child: Column(
-                children: <Widget>[AppLogo(), Text('Businesses')],
+                children: <Widget>[AppLogo(), Text('Business')],
               )),
             ),
             ListTile(
@@ -46,20 +46,20 @@ class _HomePageState extends State<HomePage> {
                 // ...
               },
             ),
+            Divider(),
             Padding(
               padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
-              child: Text("Your Businesses"),
+              child: Text("Your Businesses", style: TextStyle(fontWeight: FontWeight.bold),),
             ),
             ListTile(
-              title: Text("Suresh Foods"),
+              title: Text("Suresh Foods", style: TextStyle(fontWeight: FontWeight.w500)),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-            Divider(),
             ListTile(
-              title: Text('Ape Kade'),
+              title: Text("Ape Kade", style: TextStyle(fontWeight: FontWeight.w500)),
               onTap: () {
                 // Update the state of the app.
                 // ...
