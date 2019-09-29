@@ -22,6 +22,8 @@ abstract class Api {
   Future<ShopList> getShopsByCategoryName(String categoryName);
 
   Future<NewUser> registerUser(User user);
+
+  Future<User> getUserById(String userId);
 }
 
 class NetworkService extends Api {
@@ -91,9 +93,16 @@ class NetworkService extends Api {
   }
 
   @override
-  Future<ProductList> getFeaturedProducts() {
-    // TODO: implement getFeaturedProducts
-    return null;
+  Future<ProductList> getFeaturedProducts() async {
+    var url = '$baseURL/shops/featured';
+    var response = await http.post(
+      url,
+    );
+    if (response.statusCode == 200) {
+      return ProductList.fromJson(response.body.toString());
+    } else {
+      throw NetworkException(response.body);
+    }
   }
 
   @override
@@ -115,10 +124,24 @@ class NetworkService extends Api {
 
   @override
   Future<ProductList> getProductByShopID(String shopID) async {
+//    https://homebrands.herokuapp.com/shops/5d8c8261eb5fb30017996390/items
     var url = '$baseURL/shops/$shopID/items';
+    print(url);
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return ProductList.fromJson(response.body.toString());
+    } else {
+      print(response.body.toString());
+      throw NetworkException(response.body);
+    }
+  }
+
+  @override
+  Future<User> getUserById(String userId) async {
+    var url = '$baseURL/user/$userId';
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      return User.fromJson(response.body.toString());
     } else {
       throw NetworkException(response.body);
     }

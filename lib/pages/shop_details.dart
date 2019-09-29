@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
-
-import 'package:homebrands/constants.dart';
-import 'package:homebrands/pages/shop_list.dart';
-import 'package:homebrands/model/shop.dart';
-import 'package:homebrands/utils/screen_util.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'dart:math';
-import 'package:homebrands/model/product.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:homebrands/bloc/shop_details/shop_details_bloc.dart';
+import 'package:homebrands/constants.dart';
+import 'package:homebrands/model/product.dart';
+import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/pages/product_details.dart';
+import 'package:homebrands/utils/screen_util.dart';
+import 'package:homebrands/widgets/progress_indicator.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class ShopPage extends StatefulWidget {
-
   final Shop shop;
 
   ShopPage({this.shop});
@@ -21,87 +22,126 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
-
+  final shopDetailsBloc = ShopDetailsBloc();
   int allProductsCarouselIndex;
   int bestSellerCarouselIndex;
   final double rating = getStarRating().toDouble();
+  Shop _shop;
+
+  @override
+  void initState() {
+    _shop = widget.shop;
+
+    shopDetailsBloc.dispatch(FetchProductList(_shop.id));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-
-    Shop _shop = widget.shop;
-
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              expandedHeight: ScreenUtil.getHeight(23),
-              flexibleSpace: FlexibleSpaceBar(
-                background: Image.network('https://images-gmi-pmc.edge-generalmills.com/087d17eb-500e-4b26-abd1-4f9ffa96a2c6.jpg',fit: BoxFit.cover,),
-                title: Text(
-                  _shop.businessName,
-                  style: TextStyle(
-                    shadows: [
-                      BoxShadow(
-                        color: Colors.black12.withOpacity(1),
-                        blurRadius: 30,
-                      )
-                    ]
-                  ),
-                ),
-                centerTitle: true,
+          child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: ScreenUtil.getHeight(23),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                _shop.image,
+                fit: BoxFit.cover,
               ),
+              title: Text(
+                _shop.businessName,
+                style: TextStyle(
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black12.withOpacity(1),
+                      blurRadius: 30,
+                    )
+                  ],
+                ),
+              ),
+              centerTitle: true,
             ),
-            SliverToBoxAdapter(
+          ),
+          SliverToBoxAdapter(
               child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: ScreenUtil.getPadding(1, 10),
-                    child: SmoothStarRating(
-                      starCount: 5,
-                      rating: rating,
-                    ),
-                  ),
-                  Padding(
-                    padding: ScreenUtil.getPadding(0, 10),
-                    //TODO: change hard coded values
-                    child: Text(
-                      '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  _buildTitle('Best Sellers'),
-                  //Best seller carousel
-                  _buildBestSellingProducts(),
-                  _buildTitle('All Products'),
-                  //All products carousel menu
-                  _buildAllProductCards()
-                ],
-              )
-            )
-          ],
-        )
-      ),
+            children: <Widget>[
+              Padding(
+                padding: ScreenUtil.getPadding(1, 10),
+                child: SmoothStarRating(
+                  starCount: 5,
+                  rating: rating,
+                ),
+              ),
+//              Padding(
+//                padding: ScreenUtil.getPadding(0, 10),
+//                //TODO: change hard coded values
+//                child: Text(
+//                  '\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"',
+//                  textAlign: TextAlign.center,
+//                ),
+//              ),
+              _buildTitle('Best Sellers'),
+              //Best seller carousel
+              BlocBuilder(
+                bloc: shopDetailsBloc,
+                builder: (BuildContext context, ShopDetailsState state) {
+                  if (state is InitialShopDetailsState) {
+                    return LoadingWidget();
+                  }
+                  if (state is NetworkErrorShopDetailsState) {
+                    return Container(child: Text(state.error));
+                  }
+                  if (state is NetworkBusyShopDetailsState) {
+                    return LoadingWidget();
+                  }
+                  if (state is ProductListFetchedState) {
+                    _allProducts = state.productList;
+                    _buildBestSellingProducts();
+                  }
+                  return Container();
+                },
+              ),
+              _buildTitle('All Products'),
+              //All products carousel menu
+              BlocBuilder(
+                bloc: shopDetailsBloc,
+                builder: (BuildContext context, ShopDetailsState state) {
+                  if (state is InitialShopDetailsState) {
+                    return LoadingWidget();
+                  }
+                  if (state is NetworkBusyShopDetailsState) {
+                    return LoadingWidget();
+                  }
+                  if (state is ProductListFetchedState) {
+                    _allProducts = state.productList;
+                    _buildAllProductCards();
+                  }
+                  return Container();
+                },
+              ),
+            ],
+          ))
+        ],
+      )),
     );
   }
 
   //method to navigate to relevant screen ontap of carousel
-  navigateToProductDetails(int index, List<Product> productsList){
+  navigateToProductDetails(int index, List<Product> productsList) {
     print(index);
     print(productsList.toString());
     print(productsList[index].toString());
-    Navigator.push(context,
+    Navigator.push(
+        context,
         MaterialPageRoute(
-          builder: (context) => ProductDetailPage(
-            product: productsList[index],
-        )
-    ));
+            builder: (context) => ProductDetailPage(
+                  product: productsList[index],
+                )));
   }
 
   //method used to render the best selling products into the topmost carousel
   Widget _buildBestSellingProducts() {
-
     var items = _allProducts.toList().map((i) {
       return Builder(builder: (BuildContext context) {
         return _buildBestSellingItem(i);
@@ -109,7 +149,7 @@ class _ShopPageState extends State<ShopPage> {
     }).toList();
 
     return CarouselSlider(
-      onPageChanged: (index){
+      onPageChanged: (index) {
         setState(() {
           bestSellerCarouselIndex = index;
           print(bestSellerCarouselIndex);
@@ -130,9 +170,10 @@ class _ShopPageState extends State<ShopPage> {
       scrollDirection: Axis.horizontal,
     );
   }
-  Widget _buildBestSellingItem(Product product){
+
+  Widget _buildBestSellingItem(Product product) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         navigateToProductDetails(bestSellerCarouselIndex, _allProducts);
         print('pressed best seller');
       },
@@ -148,7 +189,10 @@ class _ShopPageState extends State<ShopPage> {
               child: Container(
                   height: double.maxFinite,
                   width: double.maxFinite,
-                  child: Image.network(product.thumbnail, fit: BoxFit.cover,)),
+                  child: Image.network(
+                    product.thumbnail,
+                    fit: BoxFit.cover,
+                  )),
             ),
             Expanded(
               child: Padding(
@@ -161,16 +205,14 @@ class _ShopPageState extends State<ShopPage> {
                       product.name,
                       style: TextStyle(
                           fontSize: ScreenUtil.getTextSize(11),
-                          fontWeight: FontWeight.w600
-                      ),
+                          fontWeight: FontWeight.w600),
                     ),
                     Text(
                       product.id,
                       style: TextStyle(
                           fontSize: ScreenUtil.getTextSize(9),
                           fontWeight: FontWeight.w100,
-                          color: kGrey
-                      ),
+                          color: kGrey),
                     ),
                     SizedBox(
                       height: ScreenUtil.getHeight(5),
@@ -181,26 +223,25 @@ class _ShopPageState extends State<ShopPage> {
                     ),
                     Container(
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              product.price.currency,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w100,
-                                  fontSize: ScreenUtil.getTextSize(12)
-                              ),
-                            ),
-                            SizedBox(width: ScreenUtil.getWidth(1),),
-                            Text(
-                              product.price.amount.toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: ScreenUtil.getTextSize(12)
-                              ),
-                            ),
-                          ],
-                        )
-                    )
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          product.price.currency,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w100,
+                              fontSize: ScreenUtil.getTextSize(12)),
+                        ),
+                        SizedBox(
+                          width: ScreenUtil.getWidth(1),
+                        ),
+                        Text(
+                          product.price.amount.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              fontSize: ScreenUtil.getTextSize(12)),
+                        ),
+                      ],
+                    ))
                   ],
                 ),
               ),
@@ -211,15 +252,6 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-
-
-
-
-
-
-
-
-
 //method used to render all products into the bottom carousel
   Widget _buildAllProductCards() {
     var items = _allProducts.toList().map((i) {
@@ -229,7 +261,7 @@ class _ShopPageState extends State<ShopPage> {
     }).toList();
 
     return CarouselSlider(
-      onPageChanged: (index){
+      onPageChanged: (index) {
         setState(() {
           allProductsCarouselIndex = index;
         });
@@ -252,7 +284,7 @@ class _ShopPageState extends State<ShopPage> {
 
   Widget _buildProduct(Product product) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         navigateToProductDetails(allProductsCarouselIndex, _allProducts);
         print('pressed all products');
       },
@@ -273,8 +305,11 @@ class _ShopPageState extends State<ShopPage> {
                 width: double.maxFinite,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
-                    image: DecorationImage(image: NetworkImage(product.thumbnail,), fit: BoxFit.cover)
-                ),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          product.thumbnail,
+                        ),
+                        fit: BoxFit.cover)),
               ),
             ),
             Text(product.name)
@@ -285,9 +320,8 @@ class _ShopPageState extends State<ShopPage> {
   }
 }
 
-
 //method to generate random star ratings
-int getStarRating(){
+int getStarRating() {
   var range = Random();
   return range.nextInt(6);
 }
@@ -308,39 +342,35 @@ Align _buildTitle(String title) {
   );
 }
 
-
-
 List<Product> _allProducts = [
   Product(
-    price: Price(currency: 'LKR', amount: 400),
-    name: 'Cashew nuts',
-    thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-    id: 'K1234567'
-  ),
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Cashew nuts',
+      thumbnail:
+          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
+      id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 600),
       name: 'Pistachio nuts',
-      thumbnail: 'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
-      id: 'K1234567'
-  ),
+      thumbnail:
+          'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
+      id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 700),
       name: 'mixed nuts',
-      thumbnail: 'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
-      id: 'K1234567'
-  ),
+      thumbnail:
+          'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
+      id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 800),
       name: 'Spicy cashew nuts',
-      thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567'
-  ),
+      thumbnail:
+          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
+      id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 900),
       name: 'macadamie nuts',
-      thumbnail: 'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
-      id: 'K1234567'
-  ),
-
+      thumbnail:
+          'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
+      id: 'K1234567'),
 ];
-

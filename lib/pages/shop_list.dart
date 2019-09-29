@@ -91,17 +91,17 @@ class _ShopListPageState extends State<ShopListPage> {
 
   _viewShop(int index) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ShopPage(
-                  shop: Shop(
-                    businessName: _allShops[index].businessName,
-                    paymentMethod: _allShops[index].paymentMethod,
-                  ),
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ShopPage(
+          shop: _allShops[index],
+        ),
+      ),
+    );
   }
 
   Widget _buildShopContainer(int shopIndex) {
+    
     return GestureDetector(
       onTap: () {
         _viewShop(shopIndex);
@@ -166,69 +166,72 @@ int getStarRating() {
 }
 
 //Dummy list of shops
-List<Shop> _allShops = [
-  Shop(
-    businessName: 'Enzo pizzarie',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Kashu nuts',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Colombo farm shop',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Factory Outlet',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Enzo pizzarie',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Kashu nuts',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Colombo farm shop',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Factory Outlet',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Enzo pizzarie',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Kashu nuts',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Colombo farm shop',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Factory Outlet',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Enzo pizzarie',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Kashu nuts',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Colombo farm shop',
-    paymentMethod: "Cash/Card",
-  ),
-  Shop(
-    businessName: 'Factory Outlet',
-    paymentMethod: "Cash/Card",
-  ),
-];
+
+List<Shop> _allShops = [];
+
+//List<Shop> _allShops = [
+//  Shop(
+//    businessName: 'Enzo pizzarie',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Kashu nuts',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Colombo farm shop',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Factory Outlet',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Enzo pizzarie',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Kashu nuts',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Colombo farm shop',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Factory Outlet',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Enzo pizzarie',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Kashu nuts',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Colombo farm shop',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Factory Outlet',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Enzo pizzarie',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Kashu nuts',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Colombo farm shop',
+//    paymentMethod: "Cash/Card",
+//  ),
+//  Shop(
+//    businessName: 'Factory Outlet',
+//    paymentMethod: "Cash/Card",
+//  ),
+//];

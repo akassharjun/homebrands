@@ -8,6 +8,7 @@ import 'package:homebrands/model/user.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 import 'package:homebrands/widgets/heading.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProfilePage extends StatefulWidget {
   @override
@@ -15,6 +16,21 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  User user;
+  
+  @override
+  Future<void> initState() async {
+    // TODO: implement initState
+    await getUserData();
+    super.initState();
+  }
+  
+  Future<void> getUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//    prefs.setString('userInfo', authResponse.user.toJson().toString());
+    user = User.fromJson(sharedPreferences.getString("userInfo"));
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

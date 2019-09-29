@@ -22,6 +22,7 @@ class ShopDetailsBloc extends Bloc<ShopDetailsEvent, ShopDetailsState> {
   }
 
   Stream<ShopDetailsState> _mapFetchProductListToState(String shopId) async* {
+    print("I'm here");
     yield NetworkBusyShopDetailsState();
     try {
       // network call
