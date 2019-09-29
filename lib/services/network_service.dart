@@ -75,6 +75,9 @@ class NetworkService extends Api {
 
   @override
   Future<ShopList> getShopsByCategoryName(String categoryName) async {
+    if (categoryName.contains("Cakes")) {
+      categoryName = "sweets";
+    }
     var url = '$baseURL/categories/$categoryName';
     var response = await http.get(
       url,
