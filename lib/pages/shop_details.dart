@@ -452,4 +452,24 @@ List<Product> browniesList = [
       id: 'K1234567'),
 ];
 
+List<Product> IndianList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Sweet String',
+      thumbnail:
+          'https://video-images.vice.com/_uncategorized/1497301097709-DSC_0979.jpeg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Indian Sweet Platter',
+      thumbnail:
+          'https://www.hindustantimes.com/rf/image_size_640x362/HT/p2/2015/11/10/Pictures/_8311bdee-878c-11e5-9788-42b4b9d38c49.jpg',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzlS89K5Vbh6uDTlheh6ZY3KzeTEGluDB45J3nxHabRB0hd2hDg',
+      id: 'K1234567'),
+];
+
 
