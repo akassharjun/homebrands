@@ -25,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return _buildDashboardPage();
   }
 
-  Column _buildDashboardPage() {
+  Widget _buildDashboardPage() {
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil.getHeight(0.25)),
@@ -183,7 +183,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTrendingItem(Shop shop) {
     return Container(
-      height: ScreenUtil.getHeight(25),
+      height: ScreenUtil.getHeight(20),
       width: ScreenUtil.getWidth(35),
       child: Column(
         children: <Widget>[
@@ -204,7 +204,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTrendingProductCard() {
     return CarouselSlider(
-      height: 350,
+      height: 280,
       viewportFraction: 0.5,
       items: <Widget>[
         TrendingCarouselItem(
@@ -508,7 +508,7 @@ class TrendingCarouselItem extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: 200,
+              height: 150,
               width: double.maxFinite,
               decoration: BoxDecoration(
                   color: svgContainerColor,
@@ -530,14 +530,14 @@ class TrendingCarouselItem extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Container(
-              height: 25,
-              width: 25,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: ellipseColor,
-              ),
-            ),
+//            Container(
+//              height: 25,
+//              width: 25,
+//              decoration: BoxDecoration(
+//                borderRadius: BorderRadius.circular(100),
+//                color: ellipseColor,
+//              ),
+//            ),
             SizedBox(
               height: 20,
             ),

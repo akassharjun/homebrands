@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
+import 'package:homebrands/pages/business_profile_screen.dart';
 import 'package:homebrands/pages/favourites.dart';
 import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/pages/login.dart';
@@ -53,6 +54,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.USER_PROFILE:
       return MaterialPageRoute(
         builder: (context) => UserProfilePage(),
+      );
+    case Routes.BUSINESS_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => BusinessProfile(),
+      );
+    case Routes.BUSINESS_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => BusinessProfile(),
       );
     default:
       return MaterialPageRoute(

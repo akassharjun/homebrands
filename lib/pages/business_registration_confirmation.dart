@@ -48,7 +48,7 @@ class BusinessRegistrationConfirmationPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: (){
-                  Navigator.pushNamed(context, Routes.LOGIN);
+                  Navigator.pushNamed(context, Routes.BUSINESS_PROFILE);
                 },
               )
             ],

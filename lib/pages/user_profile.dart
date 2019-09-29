@@ -16,14 +16,25 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
-  User user;
-  
-  @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    await getUserData();
-    super.initState();
-  }
+
+  var user = User(
+      id: 'u32342',
+      email: 'dilshan99@gmail.com',
+      phone: '0771234567',
+      fullName: 'Dilshan Manantunge',
+      username: 'dilshan99',
+      gender: 'Male',
+      birthDay: DateTime(1999,03,03)
+    //TODO: add user profile
+  );
+//  @override
+//  Future<void> initState() async {
+//    // TODO: implement initState
+//    await getUserData();
+//    super.initState();
+//  }
+
+
   
   Future<void> getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -230,16 +241,7 @@ Widget _buildRecentlyPurchasedItem(Product product) {
 
 
 
-var user = User(
-  id: 'u32342',
-  email: 'dilshan99@gmail.com',
-  phone: '0771234567',
-  fullName: 'Dilshan Manantunge',
-  username: 'dilshan99',
-  gender: 'Male',
-  birthDay: DateTime(1999,03,03)
-  //TODO: add user profile
-);
+
 
 
 List<Product> _allProducts = [

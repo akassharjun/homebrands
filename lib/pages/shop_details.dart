@@ -83,43 +83,46 @@ class _ShopPageState extends State<ShopPage> {
 //              ),
               _buildTitle('Best Sellers'),
               //Best seller carousel
-              BlocBuilder(
-                bloc: shopDetailsBloc,
-                builder: (BuildContext context, ShopDetailsState state) {
-                  if (state is InitialShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is NetworkErrorShopDetailsState) {
-                    return Container(child: Text(state.error));
-                  }
-                  if (state is NetworkBusyShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is ProductListFetchedState) {
-                    _allProducts = state.productList;
-                    _buildBestSellingProducts();
-                  }
-                  return Container();
-                },
-              ),
+//              BlocBuilder(
+//                bloc: shopDetailsBloc,
+//                builder: (BuildContext context, ShopDetailsState state) {
+//                  if (state is InitialShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is NetworkErrorShopDetailsState) {
+//                    return Container(child: Text(state.error));
+//                  }
+//                  if (state is NetworkBusyShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is ProductListFetchedState) {
+//                    _allProducts = state.productList;
+//                    _buildBestSellingProducts();
+//                  }
+//                  return Container();
+//                },
+//              ),
+
+              _buildBestSellingProducts(),
               _buildTitle('All Products'),
               //All products carousel menu
-              BlocBuilder(
-                bloc: shopDetailsBloc,
-                builder: (BuildContext context, ShopDetailsState state) {
-                  if (state is InitialShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is NetworkBusyShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is ProductListFetchedState) {
-                    _allProducts = state.productList;
-                    _buildAllProductCards();
-                  }
-                  return Container();
-                },
-              ),
+//              BlocBuilder(
+//                bloc: shopDetailsBloc,
+//                builder: (BuildContext context, ShopDetailsState state) {
+//                  if (state is InitialShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is NetworkBusyShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is ProductListFetchedState) {
+//                    _allProducts = state.productList;
+//                    _buildAllProductCards();
+//                  }
+//                  return Container();
+//                },
+//              ),
+              _buildAllProductCards()
             ],
           ))
         ],
