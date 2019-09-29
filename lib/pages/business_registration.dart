@@ -94,19 +94,19 @@ class _BusinessRegistrationPageState extends State<BusinessRegistrationPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                                'or ',
-                                style: TextStyle(
-                                    color: kWhite
-                                )
-                            ),
-                            ClickableText(
-                              text: 'Sign Up',
-                              onTap: (){
-                                print('clicked register');
-                                Navigator.pushNamed(context, Routes.SIGN_UP);
-                              },
-                            ),
+//                            Text(
+//                                'or ',
+//                                style: TextStyle(
+//                                    color: kWhite
+//                                )
+//                            ),
+//                            ClickableText(
+//                              text: 'Sign Up',
+//                              onTap: (){
+//                                print('clicked register');
+//                                Navigator.pushNamed(context, Routes.SIGN_UP);
+//                              },
+//                            ),
                           ],
                         ),
                       ],
