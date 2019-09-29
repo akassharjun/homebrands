@@ -8,6 +8,7 @@ import '../utils/screen_util.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../widgets/flat_button.dart';
+import 'order.dart';
 
 class ProductDetailPage extends StatefulWidget {
 
@@ -106,7 +107,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   textColor: kWhite,
                   backgroundColor: kMagenta,
                   onPressed: (){
-                    //TODO: add functionality
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => OrderPage(
+                        name: _product.name,
+                        quantity: quantity,
+                      )),
+                    );
                   }
                 ),
               )

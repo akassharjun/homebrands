@@ -145,7 +145,7 @@ class _ShopPageState extends State<ShopPage> {
 
   //method used to render the best selling products into the topmost carousel
   Widget _buildBestSellingProducts() {
-    var items = _allProducts.toList().map((i) {
+    var items = getProductItems(_shop.businessName).toList().map((i) {
       return Builder(builder: (BuildContext context) {
         return _buildBestSellingItem(i);
       });
@@ -177,7 +177,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _buildBestSellingItem(Product product) {
     return GestureDetector(
       onTap: () {
-        navigateToProductDetails(bestSellerCarouselIndex, _allProducts);
+        navigateToProductDetails(bestSellerCarouselIndex, getProductItems(_shop.businessName));
         print('pressed best seller');
       },
       child: Container(
@@ -257,7 +257,7 @@ class _ShopPageState extends State<ShopPage> {
 
 //method used to render all products into the bottom carousel
   Widget _buildAllProductCards() {
-    var items = _allProducts.toList().map((i) {
+    var items = getProductItems(_shop.businessName).toList().map((i) {
       return Builder(builder: (BuildContext context) {
         return _buildProduct(i);
       });
@@ -288,7 +288,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _buildProduct(Product product) {
     return GestureDetector(
       onTap: () {
-        navigateToProductDetails(allProductsCarouselIndex, _allProducts);
+        navigateToProductDetails(allProductsCarouselIndex, getProductItems(_shop.businessName));
         print('pressed all products');
       },
       child: Container(
@@ -321,6 +321,22 @@ class _ShopPageState extends State<ShopPage> {
       ),
     );
   }
+
+  List<Product> getProductItems(String shop){
+    if (shop == 'Surand\'s Sweet foods'){
+      print('surands shoop');
+      return sweetsList;
+    } else if (shop == 'Charamel Eats'){
+      print('Charamel Eats');
+    } else if (shop == 'Yei\'s Brownies'){
+      print('Yei\'s Brownies');
+    } else if (shop == 'Charamel Eats'){
+      print('Charamel Eats');
+    } else if (shop == 'Charamel Eats'){
+      print('Charamel Eats');
+    }
+  }
+
 }
 
 //method to generate random star ratings
@@ -345,19 +361,19 @@ Align _buildTitle(String title) {
   );
 }
 
-List<Product> _allProducts = [
+List<Product> sweetsList = [
   Product(
       price: Price(currency: 'LKR', amount: 400),
-      name: 'Cashew nuts',
+      name: 'Gulab Jamun',
       thumbnail:
-          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/81zWg1w1uVL._SL1500_.jpg',
+      id: 'K000002'),
   Product(
       price: Price(currency: 'LKR', amount: 600),
-      name: 'Pistachio nuts',
+      name: 'Gummy Strings',
       thumbnail:
-          'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/9187CTI60wL._SX385_.jpg',
+      id: 'K2342347'),
   Product(
       price: Price(currency: 'LKR', amount: 700),
       name: 'mixed nuts',
@@ -377,3 +393,5 @@ List<Product> _allProducts = [
           'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
       id: 'K1234567'),
 ];
+
+
