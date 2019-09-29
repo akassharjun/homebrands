@@ -215,7 +215,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ellipseColor: Color(0xff7E1AFF),
         ),
         TrendingCarouselItem(
-          sellerNameTag: 'Dessserts',
+          sellerNameTag: 'The Desert Place',
           svgAsset: 'assets/images/products/desert.svg',
           svgContainerColor: Color(0xFFF8F8F8),
           ellipseColor: Color(0xffcc0000),
