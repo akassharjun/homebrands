@@ -54,15 +54,15 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text("Suresh Foods", style: TextStyle(fontWeight: FontWeight.w500)),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, Routes.BUSINESS_PROFILE);
+                print('pressed suresh foods');
               },
             ),
             ListTile(
               title: Text("Ape Kade", style: TextStyle(fontWeight: FontWeight.w500)),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, Routes.BUSINESS_PROFILE);
+                print('pressed suresh foods');
               },
             ),
           ],

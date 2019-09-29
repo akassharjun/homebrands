@@ -102,21 +102,21 @@ class _BusinessProfileState extends State<BusinessProfile> {
                       iconData: FontAwesomeIcons.solidThumbsUp,
                       iconLabel: 'Reviews',
                       onTap: (){
-//                        Navigator.pushNamed(context, FeedbackScreen.routeID);
+                        Navigator.pushNamed(context, Routes.REVIEWS);
                       },
                     ),
                     ClickableIcon(
                       iconData: FontAwesomeIcons.bookOpen,
                       iconLabel: 'Menu',
                       onTap: (){
-//                        Navigator.pushNamed(context, SellingItems.routeID);
+                        Navigator.pushNamed(context, Routes.MENU);
                       },
                     ),
                     ClickableIcon(
                       iconData: FontAwesomeIcons.thList,
                       iconLabel: 'Orders',
                       onTap: (){
-//                        Navigator.pushNamed(context, PendingOrders.routeID);
+//                        Navigator.pushNamed(context, Routes.ORDERS);
                       },
                     ),
                   ],
