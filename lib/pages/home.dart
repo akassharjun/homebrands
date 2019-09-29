@@ -17,9 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _currentPageIndex = 0;
   PageController _controller = PageController();
 
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
 
   Category category = new Category(
     name: 'Cakes & Sweets',
@@ -35,22 +33,33 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Center(child: Column(
-                children: <Widget>[
-                  AppLogo(),
-                  Text('dfadf')
-                ],
+              child: Center(
+                  child: Column(
+                children: <Widget>[AppLogo(), Text('Businesses')],
               )),
             ),
             ListTile(
-              title: Text('Item 1'),
+              leading: Icon(Icons.shop),
+              title: Text("Business Consultation"),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 4.0),
+              child: Text("Your Businesses"),
+            ),
             ListTile(
-              title: Text('Item 2'),
+              title: Text("Suresh Foods"),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            Divider(),
+            ListTile(
+              title: Text('Ape Kade'),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -60,7 +69,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        leading: IconButton(icon: new Icon(Icons.menu, color: kAsh,),
+        leading: IconButton(
+            icon: new Icon(
+              Icons.menu,
+              color: kAsh,
+            ),
             onPressed: () => _scaffoldKey.currentState.openDrawer()),
         title: AppLogo(),
         centerTitle: true,
@@ -68,8 +81,8 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         actions: <Widget>[
           GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context,Routes.USER_PROFILE);
+            onTap: () {
+              Navigator.pushNamed(context, Routes.USER_PROFILE);
               print('pressed profile icon');
             },
             child: Container(

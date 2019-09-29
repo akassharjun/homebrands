@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homebrands/constants.dart';
-import 'package:homebrands/model/category.dart';
+import 'package:homebrands/widgets/alert_box.dart';
 
 import '../model/product.dart';
 import '../utils/screen_util.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../widgets/flat_button.dart';
-import 'order.dart';
 
 class ProductDetailPage extends StatefulWidget {
-
   final Product product;
 
   ProductDetailPage({this.product});
@@ -21,7 +17,6 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-
   int quantity = 0;
 
   @override
@@ -29,9 +24,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     Product _product = widget.product;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          _product.name
-        ),
+        title: Text(_product.name),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,18 +32,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: ScreenUtil.getHeight(25),
-                width: MediaQuery.of(context).size.width,
-                child: Image.network(_product.thumbnail, fit: BoxFit.cover,)
-              ),
+                  height: ScreenUtil.getHeight(25),
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.network(
+                    _product.thumbnail,
+                    fit: BoxFit.cover,
+                  )),
               Padding(
                 padding: ScreenUtil.getPadding(1, 0),
                 child: Text(
                   _product.name,
                   style: TextStyle(
-                    fontSize: ScreenUtil.getTextSize(12),
-                    fontWeight: FontWeight.w600
-                  ),
+                      fontSize: ScreenUtil.getTextSize(12),
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               Padding(
@@ -58,14 +52,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 child: Text(
                   _product.id,
                   style: TextStyle(
-                    fontSize: ScreenUtil.getTextSize(10),
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey.shade500
-                  ),
+                      fontSize: ScreenUtil.getTextSize(10),
+                      fontWeight: FontWeight.w300,
+                      color: Colors.grey.shade500),
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     quantity++;
                   });
@@ -80,12 +73,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Text(
                 quantity.toString(),
                 style: TextStyle(
-                  fontSize: ScreenUtil.getTextSize(30),
-                  fontWeight: FontWeight.w700
-                ),
+                    fontSize: ScreenUtil.getTextSize(30),
+                    fontWeight: FontWeight.w700),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     quantity--;
                   });
@@ -103,19 +95,22 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Button(
-                  buttonText: 'Add to Cart',
-                  textColor: kWhite,
-                  backgroundColor: kMagenta,
-                  onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => OrderPage(
-                        name: _product.name,
-                        quantity: quantity,
-                      )),
-                    );
-                  }
-                ),
+                    buttonText: 'Order',
+                    textColor: kWhite,
+                    backgroundColor: kMagenta,
+                    onPressed: () {
+                      ErrorDialog.getAlertBox(
+                          context: context,
+                          title: "Order Placed",
+                          message: "Your order has been placed succesfully",
+                          flatButtonText: "OK",
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.HOME,
+                            );
+                          });
+                    }),
               )
             ],
           ),
@@ -124,6 +119,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 }
+
+void _goBackHome(BuildContext context) {}
+//
+//Widget _showAlert() {
+//  return
+//}
 
 void _showToast(BuildContext context) {
   final scaffold = Scaffold.of(context);
