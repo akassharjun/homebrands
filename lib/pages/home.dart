@@ -17,6 +17,10 @@ class _HomePageState extends State<HomePage> {
   int _currentPageIndex = 0;
   PageController _controller = PageController();
 
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+
   Category category = new Category(
     name: 'Cakes & Sweets',
   );
@@ -24,19 +28,44 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil()..init(context);
-
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Center(child: Column(
+                children: <Widget>[
+                  AppLogo(),
+                  Text('dfadf')
+                ],
+              )),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
+        leading: IconButton(icon: new Icon(Icons.menu, color: kAsh,),
+            onPressed: () => _scaffoldKey.currentState.openDrawer()),
         title: AppLogo(),
         centerTitle: true,
         backgroundColor: Colors.grey[50],
         elevation: 0,
-        leading: GestureDetector(
-          child: Icon(
-            Icons.menu,
-            color: kAsh,
-          ),
-        ),
         actions: <Widget>[
           GestureDetector(
             onTap: (){
