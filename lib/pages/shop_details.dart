@@ -335,10 +335,15 @@ class _ShopPageState extends State<ShopPage> {
     } else if (shop == 'Yei\'s Brownies'){
       print('Yei\'s Brownies');
       return browniesList;
-    } else if (shop == 'Charamel Eats'){
+    } else if (shop == 'Gugsi Sweets'){
       print('Charamel Eats');
-    } else if (shop == 'Charamel Eats'){
+      return IndianList;
+    } else if (shop == 'Bombae Sweets'){
       print('Charamel Eats');
+      return IndianList;
+    } else if (shop == 'K Sweet Meats'){
+      print('Charamel Eats');
+      return MeatList;
     }
   }
 
@@ -469,6 +474,26 @@ List<Product> IndianList = [
       price: Price(currency: 'LKR', amount: 700),
       name: 'M&M Brownies',
       thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzlS89K5Vbh6uDTlheh6ZY3KzeTEGluDB45J3nxHabRB0hd2hDg',
+      id: 'K1234567'),
+];
+
+List<Product> MeatList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Potato Kievs',
+      thumbnail:
+          'https://media-cdn.tripadvisor.com/media/photo-s/11/83/98/56/potato-kieves.jpg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Fried chicken Stack',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk8GOinnRiaupMliBYdBiFuFbvljxZ55riDFcxfVTMLA5eI958',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxbOHpfPNsXAxOvXzq8dHH0vdgakrftxxL6byfVMLtGLVQTZFRmA',
       id: 'K1234567'),
 ];
 
