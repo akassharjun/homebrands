@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () => _scaffoldKey.currentState.openDrawer()),
         title: AppLogo(),
         centerTitle: true,
-        backgroundColor: Colors.grey[50],
+        backgroundColor: Colors.white,
         elevation: 0,
         actions: <Widget>[
           GestureDetector(
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       height: ScreenUtil.getHeight(8),
       child: BottomNavigationBar(
-        backgroundColor: Colors.grey[50],
+        backgroundColor: Colors.white,
         onTap: (int index) {
           setState(() {
             _controller.animateToPage(index,

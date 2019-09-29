@@ -29,10 +29,10 @@ class _DashboardPageState extends State<DashboardPage> {
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil.getHeight(0.25)),
-        Heading.buildTitle("Featured Products"),
+        Heading.buildTitle("Featured"),
         _buildFeaturedProductsCardSlider(),
-        SizedBox(height: ScreenUtil.getHeight(0.8)),
-        Heading.buildTitle("Trending Shops"),
+        SizedBox(height: ScreenUtil.getHeight(0.9)),
+        Heading.buildTitle("Recommended"),
         _buildTrendingShopsCardSlider()
       ],
     );
@@ -204,38 +204,39 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTrendingProductCard() {
     return CarouselSlider(
-      height: 280,
+      height: 285,
+      autoPlay: true,
       viewportFraction: 0.5,
       items: <Widget>[
         TrendingCarouselItem(
-          sellerNameTag: 'HeartStone Designs',
+          sellerNameTag: 'Ohio Jewellers',
           svgAsset: 'assets/images/products/rings.svg',
-          svgContainerColor: Color(0xffEC00E2),
+          svgContainerColor: Color(0xFFF8F8F8),
           ellipseColor: Color(0xff7E1AFF),
         ),
         TrendingCarouselItem(
-          sellerNameTag: 'HeartStone Designs',
+          sellerNameTag: 'Dessserts',
           svgAsset: 'assets/images/products/desert.svg',
-          svgContainerColor: Color(0xffff0000),
+          svgContainerColor: Color(0xFFF8F8F8),
           ellipseColor: Color(0xffcc0000),
         ),
         TrendingCarouselItem(
-          sellerNameTag: 'HeartStone Designs',
+          sellerNameTag: 'Cassim Sweets',
+          svgAsset: 'assets/images/products/cake slice.svg',
+          svgContainerColor: Color(0xFFF8F8F8),
+          ellipseColor: Color(0xffcc0000),
+          ),
+        TrendingCarouselItem(
+          sellerNameTag: 'WePlanters',
           svgAsset: 'assets/images/products/leaf.svg',
-          svgContainerColor: Color(0xff00FFF0),
+          svgContainerColor:Color(0xFFF8F8F8),
           ellipseColor: Color(0xff15DB7C),
         ),
         TrendingCarouselItem(
-          sellerNameTag: 'HeartStone Designs',
+          sellerNameTag: 'Gugsi Cakes',
           svgAsset: 'assets/images/products/cake.svg',
-          svgContainerColor: Color(0xffFFCD00),
+          svgContainerColor: Color(0xFFF8F8F8),
           ellipseColor: Color(0xffFD6A00),
-        ),
-        TrendingCarouselItem(
-          sellerNameTag: 'HeartStone Designs',
-          svgAsset: 'assets/images/products/cake slice.svg',
-          svgContainerColor: Color(0xffff0000),
-          ellipseColor: Color(0xffcc0000),
         ),
       ],
     );
@@ -508,7 +509,7 @@ class TrendingCarouselItem extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              height: 150,
+              height: 170,
               width: double.maxFinite,
               decoration: BoxDecoration(
                   color: svgContainerColor,
@@ -516,8 +517,8 @@ class TrendingCarouselItem extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.3),
-                      offset: Offset(0.0, 4.0),
-                      blurRadius: 10.0,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 1.0,
                     ),
                   ]),
               child: Padding(
@@ -544,7 +545,7 @@ class TrendingCarouselItem extends StatelessWidget {
             Text(
               sellerNameTag,
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
             ),
           ],
         ),
