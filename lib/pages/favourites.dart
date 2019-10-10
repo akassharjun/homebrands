@@ -112,7 +112,7 @@ List<Product> _allProducts = [
       name: 'Cashew nuts',
       thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
       id: 'K1234567',
-      business: 'ABC Shop'
+      business: 'Sri Lankan Nuts Shop'
   ),
   Product(
       price: Price(currency: 'LKR', amount: 400),
@@ -124,10 +124,10 @@ List<Product> _allProducts = [
   ),
   Product(
       price: Price(currency: 'LKR', amount: 700),
-      name: 'M&M Brownies',
+      name: 'Chicken Curry',
       thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxbOHpfPNsXAxOvXzq8dHH0vdgakrftxxL6byfVMLtGLVQTZFRmA',
       id: 'K1234567',
-      business: 'Yeis Brownies'
+      business: 'Chicken Kade'
   ),
   Product(
       price: Price(currency: 'LKR', amount: 400),
