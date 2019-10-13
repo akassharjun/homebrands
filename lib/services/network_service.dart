@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class Api {
   Future<ShopList> getTrendingShops();
 
-  Future<ProductList> getFeaturedProducts();
+  Future<ShopList> getFeaturedShops();
 
   Future<ShopList> getShops();
 
@@ -96,13 +96,13 @@ class NetworkService extends Api {
   }
 
   @override
-  Future<ProductList> getFeaturedProducts() async {
+  Future<ShopList> getFeaturedShops() async {
     var url = '$baseURL/shops/featured';
     var response = await http.post(
       url,
     );
     if (response.statusCode == 200) {
-      return ProductList.fromJson(response.body.toString());
+      return ShopList.fromJson(response.body.toString());
     } else {
       throw NetworkException(response.body);
     }

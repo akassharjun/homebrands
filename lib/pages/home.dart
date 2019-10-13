@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/model/category.dart';
-import 'package:homebrands/pages/dashboard.dart';
+import 'package:homebrands/pages/clean/dashboard.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/app_logo.dart';
 
-import 'category.dart';
-import 'favourites.dart';
+import 'clean/category.dart';
+import 'clean/favourites.dart';
 
 class HomePage extends StatefulWidget {
   @override

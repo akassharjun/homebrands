@@ -8,12 +8,12 @@ part 'favorite_event.dart';
 
 part 'favorite_state.dart';
 
-class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
+class FavouritesBloc extends Bloc<FavoriteEvent, FavouriteState> {
 	@override
-	FavoriteState get initialState => InitialFavoriteState();
+	FavouriteState get initialState => InitialFavouriteState();
 	
 	@override
-	Stream<FavoriteState> mapEventToState(FavoriteEvent event
+	Stream<FavouriteState> mapEventToState(FavoriteEvent event
 	                                      ) async* {
 		// TODO: Add your event logic
 	}

@@ -26,20 +26,20 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }
 
   Stream<DashboardState> _mapFetchFeaturedProductsToState() async* {
-    yield NetworkBusyFetchingProductsDashboardState();
+    yield NetworkBusyFetchingFeaturedShopsDashboardState();
     try {
       // network call
       NetworkService networkService = NetworkService();
-      ProductList products = await networkService.getFeaturedProducts();
-      yield FeaturedProductsFetchedDashboardState(productList: products.items);
+      ShopList shops = await networkService.getFeaturedShops();
+      yield FeaturedProductsFetchedDashboardState(shopList: shops.shopList);
     } catch (error, stacktrace) {
       // handle network call error
-      yield NetworkErrorFetchingProductsDashboardState(error: error.toString());
+      yield NetworkErrorFetchingFeaturedShopsDashboardState(error: error.toString());
     }
   }
 
   Stream<DashboardState> _mapFetchTrendingShopsToState() async* {
-    yield NetworkBusyFetchingShopsDashboardState();
+    yield NetworkBusyFetchingTrendingShopsDashboardState();
     try {
       // network call
       NetworkService networkService = NetworkService();
@@ -47,7 +47,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       yield TrendingShopsFetchedDashboardState(shopList: shops.shopList);
     } catch (error, stacktrace) {
       // handle network call error
-      yield NetworkErrorFetchingShopsDashboardState(error: error.toString());
+      yield NetworkErrorFetchingTrendingShopsDashboardState(error: error.toString());
     }
   }
 }

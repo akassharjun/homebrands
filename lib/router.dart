@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
 import 'package:homebrands/pages/business_profile_screen.dart';
-import 'package:homebrands/pages/favourites.dart';
+import 'package:homebrands/pages/clean/favourites.dart';
 import 'package:homebrands/pages/feedback_screen.dart';
 import 'package:homebrands/pages/home.dart';
-import 'package:homebrands/pages/login.dart';
+import 'package:homebrands/pages/clean/login.dart';
 import 'package:homebrands/pages/selling_items.dart';
 import 'package:homebrands/pages/user_profile.dart';
 import 'pages/sign_up.dart';
 import 'pages/business_registration.dart';
 import 'pages/business_registration_confirmation.dart';
-import 'pages/login.dart';
-import 'pages/splash_screen.dart';
-import 'pages/shop_details.dart';
+import 'pages/clean/login.dart';
+import 'pages/clean/splash_screen.dart';
+import 'pages/clean/shop_details.dart';
 import 'pages/product_details.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/router.dart' as router;
 import 'package:homebrands/utils/theme_data.dart';
-import 'pages/splash_screen.dart';
+import 'pages/clean/splash_screen.dart';
 import 'constants.dart';
 import 'bloc/simple_bloc_delegate.dart';
 

@@ -7,41 +7,41 @@ abstract class DashboardState extends Equatable {
 
 class InitialDashboardState extends DashboardState {}
 
-class NetworkBusyFetchingProductsDashboardState extends DashboardState {
+class NetworkBusyFetchingFeaturedShopsDashboardState extends DashboardState {
   @override
   String toString() => 'NetworkBusyDashboardState';
 }
 
-class NetworkBusyFetchingShopsDashboardState extends DashboardState {
+class NetworkBusyFetchingTrendingShopsDashboardState extends DashboardState {
   @override
   String toString() => 'NetworkBusyDashboardState';
 }
 
-class NetworkErrorFetchingProductsDashboardState extends DashboardState {
+class NetworkErrorFetchingFeaturedShopsDashboardState extends DashboardState {
   final String error;
 
-  NetworkErrorFetchingProductsDashboardState({this.error});
+  NetworkErrorFetchingFeaturedShopsDashboardState({this.error});
 
   @override
   String toString() => 'NetworkErrorFetchingProductsDashboardState';
 }
 
-class NetworkErrorFetchingShopsDashboardState extends DashboardState {
+class NetworkErrorFetchingTrendingShopsDashboardState extends DashboardState {
   final String error;
 
-  NetworkErrorFetchingShopsDashboardState({this.error});
+  NetworkErrorFetchingTrendingShopsDashboardState({this.error});
 
   @override
   String toString() => 'NetworkErrorFetchingShopsDashboardState';
 }
 
 class FeaturedProductsFetchedDashboardState extends DashboardState {
-  final List<Product> productList;
+  final List<Shop> shopList;
 
-  FeaturedProductsFetchedDashboardState({this.productList = const []})
-      : super([productList]);
+  FeaturedProductsFetchedDashboardState({this.shopList = const []})
+      : super([shopList]);
 
-  bool get hasData => productList.length > 0;
+  bool get hasData => shopList.length > 0;
 
   @override
   String toString() => 'FeaturedProductsDashboardState';

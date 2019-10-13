@@ -29,6 +29,8 @@ class ProductListFetchedState extends ShopDetailsState {
 
   ProductListFetchedState({this.productList});
 
+  bool get hasData => productList.length > 0;
+
   @override
   String toString() => 'ProductListFetchedState';
 }

@@ -1,18 +1,20 @@
 part of 'favorite_bloc.dart';
 
 @immutable
-abstract class FavoriteState extends Equatable {
-	FavoriteState([List props = const []]) : super(props);
+abstract class FavouriteState extends Equatable {
+	FavouriteState([List props = const []]) : super(props);
 }
 
-class InitialFavoriteState extends FavoriteState {}
+class InitialFavouriteState extends FavouriteState {}
 
-class NetworkBusyFavoriteState extends FavoriteState {}
+class NetworkBusyFavouriteState extends FavouriteState {}
 
-class NetworkErrorFavoriteState extends FavoriteState {}
+class NetworkErrorFavouriteState extends FavouriteState {}
 
-class FavoriteListFetchedFavoriteState extends FavoriteState {
+class FavouriteListFetchedFavouriteState extends FavouriteState {
 	final List<Product> productList;
 
-  FavoriteListFetchedFavoriteState(this.productList);
+  FavouriteListFetchedFavouriteState(this.productList);
+	
+	bool get hasData => productList.length > 0;
 }

@@ -26,6 +26,8 @@ class ShopListFetchedShopListState extends ShopListState {
 
   ShopListFetchedShopListState({this.shopList});
 
+  bool get hasData => shopList.length > 0;
+
   @override
   String toString() => 'ShopListFetchedShopListState';
 }
