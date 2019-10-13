@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:homebrands/constants.dart';
+import 'package:homebrands/pages/business_profile_screen.dart';
 import 'package:homebrands/pages/favourites.dart';
+import 'package:homebrands/pages/feedback_screen.dart';
 import 'package:homebrands/pages/home.dart';
 import 'package:homebrands/pages/login.dart';
+import 'package:homebrands/pages/selling_items.dart';
 import 'package:homebrands/pages/user_profile.dart';
 import 'pages/sign_up.dart';
 import 'pages/business_registration.dart';
@@ -53,6 +56,26 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.USER_PROFILE:
       return MaterialPageRoute(
         builder: (context) => UserProfilePage(),
+      );
+    case Routes.BUSINESS_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => BusinessProfile(),
+      );
+    case Routes.BUSINESS_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => BusinessProfile(),
+      );
+    case Routes.REVIEWS:
+      return MaterialPageRoute(
+        builder: (context) => FeedbackScreen(),
+      );
+    case Routes.BUSINESS_PROFILE:
+      return MaterialPageRoute(
+        builder: (context) => BusinessProfile(),
+      );
+    case Routes.MENU:
+      return MaterialPageRoute(
+        builder: (context) => SellingItems(),
       );
     default:
       return MaterialPageRoute(

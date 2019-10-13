@@ -20,4 +20,8 @@ class Routes {
   static const SHOP_DETAILS = '/product_details';
   static const FAVOURITES = '/favourites';
   static const USER_PROFILE = '/user_profile';
+  static const BUSINESS_PROFILE = '/business_profile';
+  static const REVIEWS = '/reviews';
+  static const MENU = '/menu';
+  static const ORDERS = '/orders';
 }

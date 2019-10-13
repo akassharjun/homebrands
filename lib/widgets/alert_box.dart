@@ -23,9 +23,7 @@ class ErrorDialog{
                 flatButtonText,
                 style: TextStyle(color: kMagenta),
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+              onPressed: onPressed,
             ),
           ],
         );

@@ -83,43 +83,46 @@ class _ShopPageState extends State<ShopPage> {
 //              ),
               _buildTitle('Best Sellers'),
               //Best seller carousel
-              BlocBuilder(
-                bloc: shopDetailsBloc,
-                builder: (BuildContext context, ShopDetailsState state) {
-                  if (state is InitialShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is NetworkErrorShopDetailsState) {
-                    return Container(child: Text(state.error));
-                  }
-                  if (state is NetworkBusyShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is ProductListFetchedState) {
-                    _allProducts = state.productList;
-                    _buildBestSellingProducts();
-                  }
-                  return Container();
-                },
-              ),
+//              BlocBuilder(
+//                bloc: shopDetailsBloc,
+//                builder: (BuildContext context, ShopDetailsState state) {
+//                  if (state is InitialShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is NetworkErrorShopDetailsState) {
+//                    return Container(child: Text(state.error));
+//                  }
+//                  if (state is NetworkBusyShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is ProductListFetchedState) {
+//                    _allProducts = state.productList;
+//                    _buildBestSellingProducts();
+//                  }
+//                  return Container();
+//                },
+//              ),
+
+              _buildBestSellingProducts(),
               _buildTitle('All Products'),
               //All products carousel menu
-              BlocBuilder(
-                bloc: shopDetailsBloc,
-                builder: (BuildContext context, ShopDetailsState state) {
-                  if (state is InitialShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is NetworkBusyShopDetailsState) {
-                    return LoadingWidget();
-                  }
-                  if (state is ProductListFetchedState) {
-                    _allProducts = state.productList;
-                    _buildAllProductCards();
-                  }
-                  return Container();
-                },
-              ),
+//              BlocBuilder(
+//                bloc: shopDetailsBloc,
+//                builder: (BuildContext context, ShopDetailsState state) {
+//                  if (state is InitialShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is NetworkBusyShopDetailsState) {
+//                    return LoadingWidget();
+//                  }
+//                  if (state is ProductListFetchedState) {
+//                    _allProducts = state.productList;
+//                    _buildAllProductCards();
+//                  }
+//                  return Container();
+//                },
+//              ),
+              _buildAllProductCards()
             ],
           ))
         ],
@@ -142,7 +145,7 @@ class _ShopPageState extends State<ShopPage> {
 
   //method used to render the best selling products into the topmost carousel
   Widget _buildBestSellingProducts() {
-    var items = _allProducts.toList().map((i) {
+    var items = getProductItems(_shop.businessName).toList().map((i) {
       return Builder(builder: (BuildContext context) {
         return _buildBestSellingItem(i);
       });
@@ -174,7 +177,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _buildBestSellingItem(Product product) {
     return GestureDetector(
       onTap: () {
-        navigateToProductDetails(bestSellerCarouselIndex, _allProducts);
+        navigateToProductDetails(bestSellerCarouselIndex, getProductItems(_shop.businessName));
         print('pressed best seller');
       },
       child: Container(
@@ -254,7 +257,7 @@ class _ShopPageState extends State<ShopPage> {
 
 //method used to render all products into the bottom carousel
   Widget _buildAllProductCards() {
-    var items = _allProducts.toList().map((i) {
+    var items = getProductItems(_shop.businessName).toList().map((i) {
       return Builder(builder: (BuildContext context) {
         return _buildProduct(i);
       });
@@ -285,7 +288,7 @@ class _ShopPageState extends State<ShopPage> {
   Widget _buildProduct(Product product) {
     return GestureDetector(
       onTap: () {
-        navigateToProductDetails(allProductsCarouselIndex, _allProducts);
+        navigateToProductDetails(allProductsCarouselIndex, getProductItems(_shop.businessName));
         print('pressed all products');
       },
       child: Container(
@@ -312,12 +315,38 @@ class _ShopPageState extends State<ShopPage> {
                         fit: BoxFit.cover)),
               ),
             ),
+            SizedBox(
+              height: ScreenUtil.getHeight(1),
+            ),
             Text(product.name)
           ],
         ),
       ),
     );
   }
+
+  List<Product> getProductItems(String shop){
+    if (shop == 'Surand\'s Sweet foods'){
+      print('surands shoop');
+      return sweetsList;
+    } else if (shop == 'Charamel Eats'){
+      print('Charamel Eats');
+      return caramelList;
+    } else if (shop == 'Yei\'s Brownies'){
+      print('Yei\'s Brownies');
+      return browniesList;
+    } else if (shop == 'Gugsi Sweets'){
+      print('Charamel Eats');
+      return IndianList;
+    } else if (shop == 'Bombae Sweets'){
+      print('Charamel Eats');
+      return IndianList;
+    } else if (shop == 'K Sweet Meats'){
+      print('Charamel Eats');
+      return MeatList;
+    }
+  }
+
 }
 
 //method to generate random star ratings
@@ -342,35 +371,130 @@ Align _buildTitle(String title) {
   );
 }
 
-List<Product> _allProducts = [
+List<Product> sweetsList = [
   Product(
       price: Price(currency: 'LKR', amount: 400),
-      name: 'Cashew nuts',
+      name: 'Gulab Jamun',
       thumbnail:
-          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/81zWg1w1uVL._SL1500_.jpg',
+      id: 'K000002'),
   Product(
       price: Price(currency: 'LKR', amount: 600),
-      name: 'Pistachio nuts',
+      name: 'Gummy Strings',
       thumbnail:
-          'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/9187CTI60wL._SX385_.jpg',
+      id: 'K2342347'),
   Product(
       price: Price(currency: 'LKR', amount: 700),
-      name: 'mixed nuts',
-      thumbnail:
-          'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
+      name: 'Skittle',
+      thumbnail:'http://cdn.shopify.com/s/files/1/1002/6470/articles/American_Candy_vs_British_Sweets_0e38d923-039a-48a4-b498-a8d152b46bde_600x.jpg?v=1453912986',
       id: 'K1234567'),
   Product(
       price: Price(currency: 'LKR', amount: 800),
-      name: 'Spicy cashew nuts',
+      name: 'Marbles',
+      id: 'K239444',
       thumbnail:
-          'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567'),
+          'https://images-na.ssl-images-amazon.com/images/I/71cM0JmxvZL._SX425_.jpg'),
+
   Product(
       price: Price(currency: 'LKR', amount: 900),
-      name: 'macadamie nuts',
+      name: 'Licorice',
       thumbnail:
-          'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDXPohYW1dj_-SLIjmIyMDir4L2rTVbaFA2wu1GsXkwgUNTXUg',
       id: 'K1234567'),
 ];
+
+List<Product> caramelList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Caramel cup',
+      thumbnail:
+          'https://i2.wp.com/www.livewellbakeoften.com/wp-content/uploads/2015/09/Homemade-Salted-Caramel-Sauce-1-4.jpg?fit=1360%2C1360&ssl=1',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Gummy Caramel',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSA9yK6tF-1Ah8eBQ6GZyd6frr57hFuZWQQIXOTV6CLlZwwqhVHQA',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'Caramel Pie',
+      thumbnail:'https://d1doqjmisr497k.cloudfront.net/-/media/mccormick-us/recipes/mccormick/n/800/no-bake-salted-caramel-pie.jpg',
+      id: 'K1234567'),
+  Product(
+      price: Price(currency: 'LKR', amount: 800),
+      name: 'ButterScotch cup',
+      id: 'K239444',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTziugPRBvHD3kQrHZuzUU34sE0yhbtAfeC_7f-ZT_DhDaLznu7-Q'),
+
+  Product(
+      price: Price(currency: 'LKR', amount: 900),
+      name: 'Caramel Chocolate cups',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOMa7qw05vb9rc6RDiSeqbMeBe9fBgv_SaeeY8M_UtRi7rhWKT',
+      id: 'K1234567'),
+];
+
+List<Product> browniesList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Classic Brownies',
+      thumbnail:
+          'https://www.averiecooks.com/wp-content/uploads/2019/04/boyfriendbrownies-6.jpg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Fudgy Brownies',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM3qZH5cphRCna9HvsrpRdg9ouvbmUgKU-jESJz32SeNH_crW5hQ',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXbQsMMg5uTH4Ms4wuq6uYk2XTkv2AknrEFthfvzjCI3qMevMK',
+      id: 'K1234567'),
+];
+
+List<Product> IndianList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Sweet String',
+      thumbnail:
+          'https://video-images.vice.com/_uncategorized/1497301097709-DSC_0979.jpeg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Indian Sweet Platter',
+      thumbnail:
+          'https://www.hindustantimes.com/rf/image_size_640x362/HT/p2/2015/11/10/Pictures/_8311bdee-878c-11e5-9788-42b4b9d38c49.jpg',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKzlS89K5Vbh6uDTlheh6ZY3KzeTEGluDB45J3nxHabRB0hd2hDg',
+      id: 'K1234567'),
+];
+
+List<Product> MeatList = [
+  Product(
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Potato Kievs',
+      thumbnail:
+          'https://media-cdn.tripadvisor.com/media/photo-s/11/83/98/56/potato-kieves.jpg',
+      id: 'K0000034'),
+  Product(
+      price: Price(currency: 'LKR', amount: 600),
+      name: 'Fried chicken Stack',
+      thumbnail:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk8GOinnRiaupMliBYdBiFuFbvljxZ55riDFcxfVTMLA5eI958',
+      id: 'K2342347'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxbOHpfPNsXAxOvXzq8dHH0vdgakrftxxL6byfVMLtGLVQTZFRmA',
+      id: 'K1234567'),
+];
+
+

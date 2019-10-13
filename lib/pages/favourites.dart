@@ -112,70 +112,37 @@ List<Product> _allProducts = [
       name: 'Cashew nuts',
       thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
       id: 'K1234567',
-      business: 'ABC Shop'
-  ),
-  Product(
-      price: Price(currency: 'LKR', amount: 600),
-      name: 'Pistachio nuts',
-      thumbnail: 'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
-  ),
-  Product(
-      price: Price(currency: 'LKR', amount: 700),
-      name: 'mixed nuts',
-      thumbnail: 'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
-      id: 'K1234567',
-    business: 'ABC Shop'
-  ),
-  Product(
-      price: Price(currency: 'LKR', amount: 800),
-      name: 'Spicy cashew nuts',
-      thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
-  ),
-  Product(
-      price: Price(currency: 'LKR', amount: 900),
-      name: 'macadamie nuts',
-      thumbnail: 'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
+      business: 'Sri Lankan Nuts Shop'
   ),
   Product(
       price: Price(currency: 'LKR', amount: 400),
-      name: 'Cashew nuts',
-      thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
-  ),
-  Product(
-      price: Price(currency: 'LKR', amount: 600),
-      name: 'Pistachio nuts',
-      thumbnail: 'https://ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/271d658aad1fe459-j240Ap95-large.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
+      name: 'Classic Brownies',
+      thumbnail:
+      'https://www.averiecooks.com/wp-content/uploads/2019/04/boyfriendbrownies-6.jpg',
+      id: 'K0000034',
+    business: 'Yeis Brownies'
   ),
   Product(
       price: Price(currency: 'LKR', amount: 700),
-      name: 'mixed nuts',
-      thumbnail: 'https://superiornutchicago.com/wp-content/uploads/2015/06/301.jpg',
+      name: 'Chicken Curry',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxbOHpfPNsXAxOvXzq8dHH0vdgakrftxxL6byfVMLtGLVQTZFRmA',
       id: 'K1234567',
-    business: 'ABC Shop'
+      business: 'Chicken Kade'
   ),
   Product(
-      price: Price(currency: 'LKR', amount: 800),
-      name: 'Spicy cashew nuts',
-      thumbnail: 'https://5.imimg.com/data5/BR/YS/MY-7452716/natural-cashew-nuts-500x500.jpg',
-      id: 'K1234567',
-      business: 'ABC Shop'
+      price: Price(currency: 'LKR', amount: 400),
+      name: 'Sweet String',
+      thumbnail:
+      'https://video-images.vice.com/_uncategorized/1497301097709-DSC_0979.jpeg',
+      id: 'K0000034',
+      business: 'Gugsis Sweets'
   ),
   Product(
-      price: Price(currency: 'LKR', amount: 900),
-      name: 'macadamie nuts',
-      thumbnail: 'https://perfectketo.com/wp-content/uploads/2018/10/bigstock-Plate-With-Organic-Macadamia-N-270297172-1024x683.jpg',
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'M&M Brownies',
+      thumbnail:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXbQsMMg5uTH4Ms4wuq6uYk2XTkv2AknrEFthfvzjCI3qMevMK',
       id: 'K1234567',
-      business: 'ABC Shop'
-  ),
+      business: 'Yeis Brownies'
+  )
 
 ];

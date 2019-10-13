@@ -1,12 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homebrands/bloc/dashboard/dashboard_bloc.dart';
 import 'package:homebrands/model/shop.dart';
 import 'package:homebrands/utils/screen_util.dart';
 import 'package:homebrands/widgets/alert_box.dart';
-import 'package:homebrands/widgets/progress_indicator.dart';
 import 'package:homebrands/widgets/heading.dart';
+import 'package:homebrands/widgets/progress_indicator.dart';
+
+import '../constants.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -21,25 +25,25 @@ class _DashboardPageState extends State<DashboardPage> {
     return _buildDashboardPage();
   }
 
-  Column _buildDashboardPage() {
+  Widget _buildDashboardPage() {
     return Column(
       children: <Widget>[
         SizedBox(height: ScreenUtil.getHeight(0.25)),
-        Heading.buildTitle("Featured Products"),
+        Heading.buildTitle("Featured"),
         _buildFeaturedProductsCardSlider(),
-        SizedBox(height: ScreenUtil.getHeight(0.8)),
-        Heading.buildTitle("Trending Shops"),
+        SizedBox(height: ScreenUtil.getHeight(0.9)),
+        Heading.buildTitle("Recommended"),
         _buildTrendingShopsCardSlider()
       ],
     );
   }
-
 
   Widget _buildFeaturedProductsCardSlider() {
     return BlocBuilder(
       bloc: dashboardBloc,
       builder: (BuildContext context, DashboardState state) {
         if (state is InitialDashboardState) {
+          return _buildWidget();
           return LoadingWidget();
         }
 
@@ -179,7 +183,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTrendingItem(Shop shop) {
     return Container(
-      height: ScreenUtil.getHeight(25),
+      height: ScreenUtil.getHeight(20),
       width: ScreenUtil.getWidth(35),
       child: Column(
         children: <Widget>[
@@ -199,27 +203,65 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget _buildTrendingProductCard() {
-    var items = _allShops.toList().map((i) {
-      return Builder(builder: (BuildContext context) {
-        return _buildTrendingItem(i);
-      });
-    }).toList();
-
     return CarouselSlider(
-      items: items,
-      height: ScreenUtil.getHeight(28),
-      aspectRatio: 16 / 9,
-      viewportFraction: 0.45,
-      initialPage: 0,
-      enableInfiniteScroll: true,
-      reverse: false,
+      height: 285,
       autoPlay: true,
-      autoPlayInterval: Duration(seconds: 3),
-      autoPlayAnimationDuration: Duration(milliseconds: 800),
-      pauseAutoPlayOnTouch: Duration(seconds: 10),
-      enlargeCenterPage: false,
-      scrollDirection: Axis.horizontal,
+      viewportFraction: 0.5,
+      items: <Widget>[
+        TrendingCarouselItem(
+          sellerNameTag: 'Ohio Jewellers',
+          svgAsset: 'assets/images/products/rings.svg',
+          svgContainerColor: Color(0xFFF8F8F8),
+          ellipseColor: Color(0xff7E1AFF),
+        ),
+        TrendingCarouselItem(
+          sellerNameTag: 'The Desert Place',
+          svgAsset: 'assets/images/products/desert.svg',
+          svgContainerColor: Color(0xFFF8F8F8),
+          ellipseColor: Color(0xffcc0000),
+        ),
+        TrendingCarouselItem(
+          sellerNameTag: 'Cassim Sweets',
+          svgAsset: 'assets/images/products/cake slice.svg',
+          svgContainerColor: Color(0xFFF8F8F8),
+          ellipseColor: Color(0xffcc0000),
+          ),
+        TrendingCarouselItem(
+          sellerNameTag: 'WePlanters',
+          svgAsset: 'assets/images/products/leaf.svg',
+          svgContainerColor:Color(0xFFF8F8F8),
+          ellipseColor: Color(0xff15DB7C),
+        ),
+        TrendingCarouselItem(
+          sellerNameTag: 'Gugsi Cakes',
+          svgAsset: 'assets/images/products/cake.svg',
+          svgContainerColor: Color(0xFFF8F8F8),
+          ellipseColor: Color(0xffFD6A00),
+        ),
+      ],
     );
+
+//    var items = _allShops.toList().map((i) {
+//      return Builder(builder: (BuildContext context) {
+//        return _buildTrendingItem(i);
+//      });
+//    }).toList();
+//
+//    return CarouselSlider(
+//      items: items,
+//      height: ScreenUtil.getHeight(28),
+//      aspectRatio: 16 / 9,
+//      viewportFraction: 0.45,
+//      initialPage: 0,
+//      enableInfiniteScroll: true,
+//      reverse: false,
+//      autoPlay: true,
+//      autoPlayInterval: Duration(seconds: 3),
+//      autoPlayAnimationDuration: Duration(milliseconds: 800),
+//      pauseAutoPlayOnTouch: Duration(seconds: 10),
+//      enlargeCenterPage: false,
+//      scrollDirection: Axis.horizontal,
+//    );
   }
 
   Widget _build(Shop shop) {
@@ -285,6 +327,95 @@ class _DashboardPageState extends State<DashboardPage> {
     dashboardBloc.dispose();
     super.dispose();
   }
+}
+
+Widget _buildWidget() {
+  return CarouselSlider(
+    height: 200,
+    viewportFraction: 0.97,
+    items: <Widget>[
+      Card(
+        elevation: 2,
+        child: Container(
+          height: 200,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Time to Sparkle your Attire',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: kGrey,
+                                fontSize: 20),
+                          ),
+                          Text(
+                            '*Starting at Rs.50/= onwards',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                color: kGrey,
+                                fontSize: 13),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: 90,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: kAsh,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'See more',
+                                  style: TextStyle(color: kWhite),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Center(
+                                  child: Icon(
+                                    FontAwesomeIcons.chevronRight,
+                                    size: 10,
+                                    color: kWhite,
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+//                      padding: EdgeInsets.all(10),
+                      child: Image.network(
+                        'https://raw.githubusercontent.com/v15a1/DEMO/master/assets/images/products/bracelet.png?token=AJELHUM3JM6RZOQ7ZBKJ2TS5TFY6U',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      )
+    ],
+  );
 }
 
 //Dummy list of shops
@@ -354,3 +485,71 @@ List<Shop> _allShops = [
     paymentMethod: "Cash/Card",
   ),
 ];
+
+class TrendingCarouselItem extends StatelessWidget {
+  final String sellerNameTag;
+  final String svgAsset;
+  final Color ellipseColor;
+  final Color svgContainerColor;
+  final Function onTap;
+
+  TrendingCarouselItem(
+      {@required this.sellerNameTag,
+      @required this.ellipseColor,
+      @required this.svgAsset,
+      @required this.svgContainerColor,
+      this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 170,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                  color: svgContainerColor,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 1.0,
+                    ),
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SvgPicture.asset(
+                  svgAsset,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+//            Container(
+//              height: 25,
+//              width: 25,
+//              decoration: BoxDecoration(
+//                borderRadius: BorderRadius.circular(100),
+//                color: ellipseColor,
+//              ),
+//            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              sellerNameTag,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
