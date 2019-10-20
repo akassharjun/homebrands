@@ -59,6 +59,9 @@ class _CartPageState extends State<CartPage> {
   }
 
   SliverList _buildPendingOrders(List<CartPage> cartList){
+
+    List<CartPage> cart = cartList;
+
     return SliverList(
       delegate: SliverChildBuilderDelegate((BuildContext context, int index){
         return Padding(
@@ -107,7 +110,8 @@ class _CartPageState extends State<CartPage> {
                       FlatButton(
                         onPressed: (){
                           setState(() {
-                            cartList.removeAt(0);
+                            print(cart);
+                            cart.removeAt(0);
                           });
                         },
                         color: Colors.red,

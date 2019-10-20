@@ -12,7 +12,7 @@ List<Product> getProductItems(String shop){
   } else if (shop == 'Yei\'s Brownies'){
     print('Yei\'s Brownies');
     return browniesList;
-  } else if (shop == 'Gugsi Sweets'){
+  } else if (shop == 'Gehans Sweets'){
     print('Charamel Eats');
     return IndianList;
   } else if (shop == 'Bombae Sweets'){
@@ -29,8 +29,147 @@ List<Product> getProductItems(String shop){
     return sunflowerShop;
   }else if (shop == 'Plants and Seeds'){
     return plantShop;
+  }else if (shop == 'Gifts.inc'){
+    return giftsInc;
+  }else if (shop == 'John Gift Ideas'){
+    return johnGiftIdeas;
+  }else if (shop == 'The  Creative Stationary Shop'){
+    return creativeStationaryShop;
+  }else if (shop == 'Books and stuff'){
+    return booksAndStuff;
+  }else if (shop == 'Ravi Textiles'){
+    return clothes;
+  }else if (shop == 'kanthi\'s Dressers'){
+    return clothes;
+  }else if (shop == 'Thivyan\'s Food'){
+    return food;
   }
 }
+List<Product> food = [
+  Product(
+      price: Price(currency: 'LKR', amount: 2000),
+      name: 'Mac n Cheese',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0euzUbX_PRxwziBLsAvYVSsqRmB3m_P-j5zQP5aQaMCWAMrixhQ',
+      id: 'F372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 3000),
+      name: 'Manicotti',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwxYTt1BmbshGsp90TqnJOxyQXAHT9EuhswaibcUpOQpLtxsvg8w',
+      id: 'F843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 1500),
+      name: 'Pizza',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzo4PZ3fPoKnI4QvE0ogmYh_xFXwfp_dyJxMzJDAq6_llCZXKd',
+      id: 'F8738753'),
+];
+
+List<Product> clothes = [
+  Product(
+      price: Price(currency: 'LKR', amount: 2000),
+      name: 'unisex Denim Jackets',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4l4rfONcukQw13fWRmPAicH56yYSsPoMtZY7BnXPhvMqDOW1osQ',
+      id: 'C372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 3000),
+      name: 'unisex Denim pants',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4l4rfONcukQw13fWRmPAicH56yYSsPoMtZY7BnXPhvMqDOW1osQ',
+      id: 'C843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 1500),
+      name: 'Ladies frocks',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2DalXF10HXAbKDcl9qnO_BXKrgmC-O-kYkCAeoM3jLFXE_eqvig',
+      id: 'C8738753'),
+];
+
+List<Product> booksAndStuff = [
+  Product(
+      price: Price(currency: 'LKR', amount: 1000),
+      name: 'Rag books',
+      thumbnail:
+      'https://www.artsmendocino.org/wp-content/uploads/sites/www.artsmendocino.org/images/2018/12/event-featured-David-Steffen-1544478595.jpeg',
+      id: 'S372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'Pen holders',
+      thumbnail:
+      'https://i.pinimg.com/originals/d6/01/b5/d601b549b8e7a794b2efe3dff9c7039f.jpg',
+      id: 'S843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 300),
+      name: 'Simple pen holder',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0c03lV6wo-Rj00qqVwY9orM58j4wvE8e_n0XScn5c0zZYOOLqQ',
+      id: 'S8738753'),
+];
+
+List<Product> creativeStationaryShop = [
+  Product(
+      price: Price(currency: 'LKR', amount: 1000),
+      name: 'Stackable storage',
+      thumbnail:
+      'https://i.pinimg.com/originals/d6/01/b5/d601b549b8e7a794b2efe3dff9c7039f.jpg',
+      id: 'S372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'Pen holders',
+      thumbnail:
+      'https://i.pinimg.com/originals/d6/01/b5/d601b549b8e7a794b2efe3dff9c7039f.jpg',
+      id: 'S843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 300),
+      name: 'Simple pen holder',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQH0c03lV6wo-Rj00qqVwY9orM58j4wvE8e_n0XScn5c0zZYOOLqQ',
+      id: 'S8738753'),
+];
+
+List<Product> giftsInc = [
+  Product(
+      price: Price(currency: 'LKR', amount: 300),
+      name: 'Hand-made gift boxes',
+      thumbnail:
+      'https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/gifts.jpg?itok=fAimw_Cd',
+      id: 'G372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 700),
+      name: 'Hand-made Note books',
+      thumbnail:
+      'https://cdn.notonthehighstreet.com/fs/cd/28/47dd-856d-4ca3-b85b-d7c5a70b1e85/original_notebook-gift-set.jpg',
+      id: 'G843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 1200),
+      name: 'Custom engraved pens',
+      thumbnail:
+      'https://www.papierplume.com/pub/media/wysiwyg/texter3.jpg',
+      id: 'G8738753'),
+];
+
+List<Product> johnGiftIdeas = [
+  Product(
+      price: Price(currency: 'LKR', amount: 1000),
+      name: 'Unisex gift sets',
+      thumbnail:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb-bhl0SILE11cET-WrwoSHaQPxHrEK_G_RIWzuJXnuDMwf1uUqg',
+      id: 'G372873'),
+  Product(
+      price: Price(currency: 'LKR', amount: 1500),
+      name: 'Chocolate box',
+      thumbnail:
+      'https://bateel.com/media/catalog/product/cache/b4e73b990302829110737f82b8732bab/o/a/oak_square_family_1.jpg',
+      id: 'G843758'),
+  Product(
+      price: Price(currency: 'LKR', amount: 1200),
+      name: 'Custom made pens',
+      thumbnail:
+      'https://www.papierplume.com/pub/media/wysiwyg/texter3.jpg',
+      id: 'G8738753'),
+];
 
 List<Product> plantShop = [
   Product(
